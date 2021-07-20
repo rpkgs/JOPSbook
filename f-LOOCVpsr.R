@@ -1,0 +1,73 @@
+# External prediction performance plot (Biscuit and Sugar data)
+# A graph in the book 'Practical Smoothing. The Joys of P-splines'
+# Paul Eilers and Brian Marx, 2019
+
+library(ggplot2)
+library(JOPS)
+library(gridExtra)
+
+# Get the data
+library(fds)
+data(nirc)
+
+iindex = nirc$x
+X = nirc$y
+sel = 50:650  #1200 <= x & x<= 2400
+X = X[sel, ]
+iindex = iindex[sel]
+dX = diff(X)
+diindex = iindex[-1]
+y = as.vector(labc[1, 1:40])  #fat
+oout = 23  # Denoted as outlier by Brown et al. (2001)
+dX = t(dX[, -oout])
+y = y[-oout]
+
+# Optimal fit
+fit1 = psSignal(y, dX, diindex, nseg = 25, lambda = 3.2e-07, pord = 3)
+cor1=cor(fit1$press_mu, y)
+# Dataframes and ggplot
+F1=data.frame(x=fit1$press_mu, y=y)
+plt1 = ggplot(F1, aes(x = x, y = y)) +
+  geom_point(size = 1.2) +
+  geom_abline(intercept = 0, slope=1, size = 0.3) +
+  xlab("Predicted %fat") +
+  ylab("Observed %fat") +
+  theme(
+    axis.title.x = element_text(size=16),
+    axis.title.y = element_text(size=16)) +
+  ggtitle(" ") +
+  JOPS_theme()
+# Get the data
+x0 = Sugar$X
+x0 = x0 - apply(x0, 1, mean)  #center Signal
+y = as.vector(Sugar$y[, 3])  #Response is Ash
+
+# Inputs for two-dimensional signal regression
+nseg = c(7, 37)
+pord = c(3, 3)
+min_ = c(230, 275)
+max_ = c(340, 560)
+M1_index = rev(c(340, 325, 305, 290, 255, 240, 230))
+M2_index = seq(from = 275, to = 560, by = 0.5)
+p1 = length(M1_index)
+p2 = length(M2_index)
+int <- T  # intercept in model
+
+# Fit optimal model based on LOOCV, found via ucminf
+opt_lam=c(81110, 52275)
+Pars_opt=rbind(c(min_[1],max_[1],nseg[1],3,opt_lam[1],pord[1]),
+               c(min_[2],max_[2],nseg[2],3,opt_lam[2],pord[2]))
+fit=fit_opt=ps2DSignal(y, x0, p1, p2, "unfolded", M1_index, M2_index, Pars_opt,
+                       int=int, ridge_adj=1e-6)
+
+cor2=cor(fit_opt$press_mu, y)
+# Set up dataframes for ggplot
+F1=data.frame(x=fit_opt$press_mu, y=y)
+plt2 = ggplot(F1, aes(x = x, y = y)) +
+  geom_point(size = 1.2) +
+  geom_abline(intercept = 0,slope=1,size = 0.3) +
+  xlab("Predicted %ash") + ylab("Observed %ash") +
+  ggtitle(" ") +
+  JOPS_theme()
+
+grid.arrange(plt1, plt2, ncol = 2, nrow = 1)
