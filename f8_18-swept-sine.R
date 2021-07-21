@@ -81,3 +81,11 @@ plot(plt1)
 
 plots = grid.arrange(plt1, plt2, nrow = 2, ncol = 1)
 plot(plots)
+
+
+{
+    # Compute and plot a B-spline basis matrix
+    x = seq(0, 360, by = 2)
+    B = bbase(x, 0, 360, nseg = 8, bdeg = 2)
+    matplot(x, B, type = 'l', lty = 1, lwd = 2, xlab = 'x', ylab = '')
+}
