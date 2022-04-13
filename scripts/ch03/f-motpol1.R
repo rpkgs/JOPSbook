@@ -42,5 +42,3 @@ qp = ggplot(mcycle, aes(x = times, y = accel)) +
 
 # Make plot and save pdf
 print(qp)
-
-

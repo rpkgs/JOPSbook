@@ -11,55 +11,20 @@ library(JOPS)
 # Get the data
 data(ECG)
 X = ECG
+
 m0 = nrow(X)
 time = (1:m0) * 0.004
 sel = which(0.3 < time & time < 1.3)
 y = X[sel, 3]
 time = time[sel]
-m = length(y)
 
-# Basis
-E = diag.spam(m)
-B = cbind(E, E)
-
-# Penalty 1
-D = diff(E, diff = 2)
-P1 = t(D) %*% D
-
-# Penalty 2
-p = (1/60) / 0.004
-om = cos(2 * pi / p)
-D2 = matrix(0, m - 2, m)
-for (i in 1:(m - 2)) {
-  D2[i, i] = D2[i, i + 2] = 1
-  D2[i, i + 1] = -om * 2
+{
+  period <- (1/60) / 0.004
+  r = whit_pen2(y, period, lamb_anom = 1, lamb_season = 1e3)
+  par(mfrow = c(2, 1), mar = c(3, 3, 1, 1))
+  plot(r$z1, type = "l")
+  plot(r$z2, type = "l")
 }
-D2 = as.spam(D2)
-P2 = t(D2) %*% D2
-
-# Make penalty matrix
-P = diag.spam(2 * m)
-r1 = 1:m
-lambda1 = 0.1
-P[r1, r1] = lambda1 * P1
-r2 = r1 + m
-lambda2 = 100000
-P[r2, r2] = lambda2 * P2
-
-# Solve the system
-BtB = t(B) %*% B
-z = solve(BtB + P, t(B) %*% y)
-z1 = z[r1]
-z2 = z[r2]
-mu = B %*% z
-
-# Diagnostics
-K = solve(BtB + P, BtB)
-dk1 = diag(K[r1, r1])
-ed1 = sum(dk1)
-dk2 = diag(K[r2, r2])
-ed2 = sum(dk2)
-cat('lambda1, lambda2, d1, ed2', lambda1, lambda2, ed1, ed2, '\n')
 
 # Simple smooth
 lambda3 = 1
