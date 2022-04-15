@@ -14,6 +14,8 @@ Imports:
 Suggests: 
     rmarkdown, bookdown,
     SemiPar, fields, spam, JOPS,
+    data.table,
+    gridExtra,
     covr,
     testthat (>= 3.0.0)
 Encoding: UTF-8

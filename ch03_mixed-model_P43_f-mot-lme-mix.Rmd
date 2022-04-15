@@ -3,10 +3,10 @@
 ## mixed model
 
 ```{r,message=FALSE}
-library(ggplot2)
+# library(JOPS)
+# library(ggplot2)
 library(gridExtra)
 library(MASS)
-library(JOPS)
 ```
 
 ```{r}

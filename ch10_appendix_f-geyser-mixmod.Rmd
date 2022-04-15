@@ -1,12 +1,18 @@
+# Appendix
+
+Figure E.1: 
+
+```{r,message=FALSE}
 # Plots for optimal smoothing (Old Faithful geyser data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'
 # Paul Eilers and Brian Marx, 2019
-
 library(ggplot2)
 library(gridExtra)
 library(JOPS)
 library(MASS)
+```
 
+```{r}
 # Get the data
 data(faithful)
 u = faithful[, 1]  # Eruption length
@@ -21,8 +27,7 @@ nseg = 20
 lambda = 1
 d = 3
 
-# Iterative Poisson smoothing, updating tuning based on diff of
-# coeffs
+# Iterative Poisson smoothing, updating tuning based on diff of coeffs
 aics = NULL
 for (it in 1:20) {
     fit = psPoisson(x, y, nseg = nseg, pord = d, lambda = lambda, show = F)
@@ -85,3 +90,4 @@ plt2 = ggplot(Dat, aes(u)) +
 
 # Make and save graph
 grid.arrange(plt2, plt1, nrow = 2, ncol = 1)
+```

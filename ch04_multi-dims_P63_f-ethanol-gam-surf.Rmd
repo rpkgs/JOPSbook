@@ -1,14 +1,16 @@
+```{r}
+library(SemiPar)
+# library(reshape2)
+# library(ggplot2)
+# library(JOPS)
+library(data.table)
+require2(metR)
+```
+
+```{r}
 # Image of GAM surface (Ethanol data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'
 # Paul Eilers and Brian Marx, 2019
-
-library(SemiPar)
-library(reshape2)
-library(data.table)
-library(ggplot2)
-library(JOPS)
-library(metR)
-
 # Get the data
 data(ethanol)
 
@@ -90,5 +92,5 @@ plt = ggplot(dens,  aes(x, y, fill = NOx)) +
              axis.title.x = element_text(size = 16),
              axis.title.y = element_text(size = 16))
 
-
 print(plt)
+```

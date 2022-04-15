@@ -1,12 +1,14 @@
+```{r,message=FALSE}
 # GAM smoothing (Ethanol data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'
 # Paul Eilers and Brian Marx, 2019
-
 library(ggplot2)
 library(SemiPar)
 library(gridExtra)
 library(JOPS)
+```
 
+```{r}
 # Get the data
 data(ethanol)
 
@@ -88,3 +90,4 @@ plt4 = ggplot(aes(x = f1 + f2, y = NOx), data = Fmod) +
 
 # Make and save pdf
 grid.arrange(plt1, plt2, plt3, plt4, ncol = 2, nrow = 2)
+```

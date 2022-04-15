@@ -13,3 +13,17 @@ listk <- function(...) {
   x <- setNames(list(...), vars)
   return(x)
 }
+
+#' @export
+"%||%" <- function(a, b) {
+  if (!is.null(a)) a else b
+}
+
+#' @export 
+require2 <- function(pkg, ...) {
+  pkgname = deparse(substitute(pkg))
+  if (!require(pkgname, character.only = TRUE)){
+    pak::pkg_install(pkgname)
+    requrie(pkgname, character.only = TRUE)
+  }
+}

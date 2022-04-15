@@ -1,11 +1,13 @@
+```{r}
 # Tensor product P-spline fit and extrapolation (Ethanol data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'
 # Paul Eilers and Brian Marx, 2019
-
 library(SemiPar)
 library(fields)
 library(JOPS)
+```
 
+```{r}
 # simulate data
 m = 200
 set.seed(2017)
@@ -111,3 +113,4 @@ image.plot(u, v, Fit, col = terrain.colors(100), xlab = "", ylab = "",
     horizontal = T, legend.width = 0.7)
 contour(u, v, Fit, add = T, col = "steelblue", labcex = 0.7)
 points(x, y, pch = pchs, col = "blue", cex = 1.1)
+```
