@@ -1,3 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^.*\.Rmd$
+^.*\.bib$
+^.*\.yml$
+^scripts$
+^latex$

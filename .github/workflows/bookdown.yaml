@@ -97,7 +97,13 @@ jobs:
         with:
           name: _book
           path: _book/
-  
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ matrix.config.os }}-r${{ matrix.config.r }}-results
+          path: .
 # Need to first create an empty gh-pages branch
 # see https://pkgdown.r-lib.org/reference/deploy_site_github.html
 # and also add a secrets for an EMAIL to the repository

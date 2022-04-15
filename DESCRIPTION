@@ -14,13 +14,13 @@ Imports:
 Suggests: 
     rmarkdown, bookdown,
     SemiPar, fields, spam, JOPS,
-    data.table,
+    reshape2, metR,
     gridExtra,
     covr,
     testthat (>= 3.0.0)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-URL: https://github.com/rpkgs/rtrend
-BugReports: https://github.com/rpkgs/rtrend/issues
+URL: https://github.com/rpkgs/JOPSbook
+BugReports: https://github.com/rpkgs/JOPSbook/issues
 Config/testthat/edition: 3

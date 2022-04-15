@@ -24,6 +24,6 @@ require2 <- function(pkg, ...) {
   pkgname = deparse(substitute(pkg))
   if (!require(pkgname, character.only = TRUE)){
     pak::pkg_install(pkgname)
-    requrie(pkgname, character.only = TRUE)
+    require(pkgname, character.only = TRUE)
   }
 }

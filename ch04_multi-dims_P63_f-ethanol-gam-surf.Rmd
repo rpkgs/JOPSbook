@@ -1,10 +1,9 @@
 ```{r}
 library(SemiPar)
-# library(reshape2)
+library(reshape2)
 # library(ggplot2)
 # library(JOPS)
-library(data.table)
-require2(metR)
+library(metR)
 ```
 
 ```{r}
