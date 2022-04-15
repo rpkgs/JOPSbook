@@ -6,10 +6,6 @@ about
 usage
 render-book
 preview-book
-p-spline
-mixed-model
-spatial-interpolation
-appendix
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
