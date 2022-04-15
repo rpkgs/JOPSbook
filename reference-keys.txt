@@ -8,6 +8,7 @@ render-book
 preview-book
 hello-bookdown
 a-section
+spatial-interpolation
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
