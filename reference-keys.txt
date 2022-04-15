@@ -6,6 +6,9 @@ about
 usage
 render-book
 preview-book
+bookdown
+使用心得
+参考文献
 p-spline
 mixed-model
 multidimensional-smoothing

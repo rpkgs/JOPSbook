@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Blocks | A Minimal Book Example</title>
+  <title>Chapter 2 bookdown | A Minimal Book Example</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Blocks | A Minimal Book Example" />
+  <meta property="og:title" content="Chapter 2 bookdown | A Minimal Book Example" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Blocks | A Minimal Book Example" />
+  <meta name="twitter:title" content="Chapter 2 bookdown | A Minimal Book Example" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -36,8 +36,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="footnotes-and-citations.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="p-spline.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -199,30 +199,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="blocks" class="section level1 hasAnchor">
-<h1><span class="header-section-number">Chapter 9</span> Blocks<a href="blocks.html#blocks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="equations" class="section level2 hasAnchor">
-<h2><span class="header-section-number">9.1</span> Equations<a href="blocks.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Here is an equation.</p>
-<p><span class="math display" id="eq:binom">\[\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \tag{9.1}
-\end{equation}\]</span></p>
-<p>You may refer to using <code>\@ref(eq:binom)</code>, like see Equation <a href="blocks.html#eq:binom">(9.1)</a>.</p>
+<div id="bookdown" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 2</span> bookdown<a href="bookdown.html#bookdown" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="使用心得" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.1</span> 使用心得<a href="bookdown.html#使用心得" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><code>Rmd</code>文件名的排序决定了编译顺序。建议Rmd在命名时需要考虑文件排序。</li>
+<li><code>R</code>包加载一次即可，常用的包，可以在<code>index.Rmd</code>中加载，因为<code>index.Rmd</code>是最先被编译的<code>Rmd</code>文件。</li>
+</ul>
 </div>
-<div id="theorems-and-proofs" class="section level2 hasAnchor">
-<h2><span class="header-section-number">9.2</span> Theorems and proofs<a href="blocks.html#theorems-and-proofs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Labeled theorems can be referenced in text using <code>\@ref(thm:tri)</code>, for example, check out this smart theorem <a href="blocks.html#thm:tri">9.1</a>.</p>
-<div class="theorem">
-<p><span id="thm:tri" class="theorem"><strong>Theorem 9.1  </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the <em>length</em> of the hypotenuse
-and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the <strong>other</strong> two sides, we have
-<span class="math display">\[a^2 + b^2 = c^2\]</span></p>
-</div>
-<p>Read more here <a href="https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html</a>.</p>
-</div>
-<div id="callout-blocks" class="section level2 hasAnchor">
-<h2><span class="header-section-number">9.3</span> Callout blocks<a href="blocks.html#callout-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html</a></p>
+<div id="参考文献" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.2</span> 参考文献<a href="bookdown.html#参考文献" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Xie Yihui (2022), Books and Technical Documents with R Markdown,
+<a href="https://bookdown.org/yihui/bookdown" class="uri">https://bookdown.org/yihui/bookdown</a></p></li>
+<li><p>李东风 (2022), R语言教程, 北京大学《统计软件》,
+<a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/bookdown.html" class="uri">https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/bookdown.html</a></p></li>
+<li><p>王敏杰 (2022), 数据科学中的R语言，四川师范大学研究生公选课，<a href="https://github.com/perlatex/R_for_Data_Science" class="uri">https://github.com/perlatex/R_for_Data_Science</a>，
+<a href="https://bookdown.org/wangminjie/R4DS/baseR-intro-ds.html" class="uri">https://bookdown.org/wangminjie/R4DS/baseR-intro-ds.html</a></p></li>
+</ol>
 
 </div>
 </div>
@@ -231,8 +226,8 @@ and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</
           </div>
         </div>
       </div>
-<a href="footnotes-and-citations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="p-spline.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -263,7 +258,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rpkgs/JOPSbook/edit/master/tutorial_05-blocks.Rmd",
+"link": "https://github.com/rpkgs/JOPSbook/edit/master/01_bookdown.Rmd",
 "text": "Edit"
 },
 "history": {
