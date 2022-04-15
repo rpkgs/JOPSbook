@@ -2,11 +2,6 @@ fig:nice-fig
 tab:nice-tab
 eq:binom
 thm:tri
-render
-view
-thinking
-author
-reference
 p-spline
 mixed-model
 multidimensional-smoothing

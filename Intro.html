@@ -143,12 +143,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Practical Smoothing, The Joys of P-splines</a></li>
 
 <li class="divider"></li>
-<li><a href="前言.html#前言">前言<span></span></a><ul>
-<li class="chapter" data-level="0.1" data-path="前言.html"><a href="前言.html"><i class="fa fa-check"></i><b>0.1</b> bookdown编译<span></span></a></li>
-<li class="chapter" data-level="0.2" data-path="前言.html"><a href="前言.html#view"><i class="fa fa-check"></i><b>0.2</b> bookdown预览<span></span></a></li>
-<li class="chapter" data-level="0.3" data-path="前言.html"><a href="前言.html#thinking"><i class="fa fa-check"></i><b>0.3</b> bookdown使用心得<span></span></a></li>
-<li class="chapter" data-level="0.4" data-path="前言.html"><a href="前言.html#author"><i class="fa fa-check"></i><b>0.4</b> 作者简介<span></span></a></li>
-<li class="chapter" data-level="0.5" data-path="前言.html"><a href="前言.html#reference"><i class="fa fa-check"></i><b>0.5</b> 参考文献<span></span></a></li>
+<li><a href="Intro.html#Intro">前言<span></span></a><ul>
+<li><a href="Intro.html#render">bookdown编译<span></span></a></li>
+<li><a href="Intro.html#view">bookdown预览<span></span></a></li>
+<li><a href="Intro.html#thinking">bookdown使用心得<span></span></a></li>
+<li><a href="Intro.html#author">作者简介<span></span></a></li>
+<li><a href="Intro.html#reference">参考文献<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="p-spline.html"><a href="p-spline.html"><i class="fa fa-check"></i><b>1</b> P-Spline<span></span></a><ul>
 <li class="chapter" data-level="1.1" data-path="p-spline.html"><a href="p-spline.html#mixed-model"><i class="fa fa-check"></i><b>1.1</b> mixed model<span></span></a></li>
@@ -202,35 +202,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="author"><em>John Doe</em></p>
 <p class="date"><em>2022-04-15</em></p>
 </div>
-<div id="前言" class="section level1 unnumbered hasAnchor">
-<h1>前言<a href="前言.html#前言" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="render" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.1</span> bookdown编译<a href="前言.html#render" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Intro" class="section level1 unnumbered hasAnchor">
+<h1>前言<a href="Intro.html#Intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="render" class="section level2 unnumbered hasAnchor">
+<h2>bookdown编译<a href="Intro.html#render" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can render the HTML version of this example book without changing anything:</p>
 <ol style="list-style-type: decimal">
 <li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
 <li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="前言.html#cb1-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="Intro.html#cb1-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>()</span></code></pre></div>
 <p>如需编译pdf（<code>bookdown::pdf_book</code>），需要安装<code>XeLaTeX</code>。建议使用<code>TinyTeX</code>：<a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>。</p>
 </div>
-<div id="view" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.2</span> bookdown预览<a href="前言.html#view" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="前言.html#cb2-1"></a>bookdown<span class="op">::</span><span class="kw">serve_book</span>()</span></code></pre></div>
+<div id="view" class="section level2 unnumbered hasAnchor">
+<h2>bookdown预览<a href="Intro.html#view" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="Intro.html#cb2-1"></a>bookdown<span class="op">::</span><span class="kw">serve_book</span>()</span></code></pre></div>
 </div>
-<div id="thinking" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.3</span> bookdown使用心得<a href="前言.html#thinking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="thinking" class="section level2 unnumbered hasAnchor">
+<h2>bookdown使用心得<a href="Intro.html#thinking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><p><code>Rmd</code>文件名的排序决定了编译顺序。建议Rmd在命名时需要考虑文件排序。</p></li>
 <li><p><code>R</code>包加载一次即可。<code>index.Rmd</code>是最先被编译的<code>Rmd</code>文件，因此常用的R包可以在<code>index.Rmd</code>中加载。</p></li>
 </ul>
 </div>
-<div id="author" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.4</span> 作者简介<a href="前言.html#author" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="author" class="section level2 unnumbered hasAnchor">
+<h2>作者简介<a href="Intro.html#author" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>孔冬冬，自然地理学博士，中国地质大学（武汉）任教。教授本科生《水文气象学》课程。</p>
 </div>
-<div id="reference" class="section level2 hasAnchor">
-<h2><span class="header-section-number">0.5</span> 参考文献<a href="前言.html#reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="reference" class="section level2 unnumbered hasAnchor">
+<h2>参考文献<a href="Intro.html#reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li><p>Xie Yihui (2022), Books and Technical Documents with R Markdown,
 <a href="https://bookdown.org/yihui/bookdown" class="uri">https://bookdown.org/yihui/bookdown</a></p></li>
