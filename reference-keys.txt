@@ -2,6 +2,9 @@ fig:nice-fig
 tab:nice-tab
 eq:binom
 thm:tri
+Mixed-Model
+案例1
+错误的方法固定效应模型
 p-spline
 mixed-model
 multidimensional-smoothing
