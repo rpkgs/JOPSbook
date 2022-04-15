@@ -37,7 +37,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="spatial-interpolation.html"/>
+<link rel="next" href="multidimensional-smoothing.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -151,7 +151,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="p-spline.html"><a href="p-spline.html"><i class="fa fa-check"></i><b>2</b> P-Spline<span></span></a><ul>
 <li class="chapter" data-level="2.1" data-path="p-spline.html"><a href="p-spline.html#mixed-model"><i class="fa fa-check"></i><b>2.1</b> mixed model<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="spatial-interpolation.html"><a href="spatial-interpolation.html"><i class="fa fa-check"></i><b>3</b> Spatial Interpolation<span></span></a></li>
+<li class="chapter" data-level="3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html"><i class="fa fa-check"></i><b>3</b> Multidimensional Smoothing<span></span></a><ul>
+<li class="chapter" data-level="3.1" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.1"><i class="fa fa-check"></i><b>3.1</b> Figure 4.1<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.2"><i class="fa fa-check"></i><b>3.2</b> Figure 4.2<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.8"><i class="fa fa-check"></i><b>3.3</b> Figure 4.8<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.9"><i class="fa fa-check"></i><b>3.4</b> Figure 4.9<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.10"><i class="fa fa-check"></i><b>3.5</b> Figure 4.10<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.11"><i class="fa fa-check"></i><b>3.6</b> Figure 4.11<span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix<span></span></a></li>
 <li class="chapter" data-level="5" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>5</b> Cross-references<span></span></a><ul>
 <li class="chapter" data-level="5.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>5.1</b> Chapters and sub-chapters<span></span></a></li>
@@ -265,188 +272,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-2"><a href="p-spline.html#cb7-2"></a><span class="co"># graphics.off()</span></span>
 <span id="cb7-3"><a href="p-spline.html#cb7-3"></a><span class="co"># grid.arrange(plt1, ncol = 1, nrow = 1)</span></span></code></pre></div>
 
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="p-spline.html#cb8-1"></a><span class="co"># GAM smoothing (Ethanol data)</span></span>
-<span id="cb8-2"><a href="p-spline.html#cb8-2"></a><span class="co"># A graph in the book &#39;Practical Smoothing. The Joys of P-splines&#39;</span></span>
-<span id="cb8-3"><a href="p-spline.html#cb8-3"></a><span class="co"># Paul Eilers and Brian Marx, 2019</span></span>
-<span id="cb8-4"><a href="p-spline.html#cb8-4"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb8-5"><a href="p-spline.html#cb8-5"></a><span class="kw">library</span>(SemiPar)</span>
-<span id="cb8-6"><a href="p-spline.html#cb8-6"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb8-7"><a href="p-spline.html#cb8-7"></a><span class="kw">library</span>(JOPS)</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="p-spline.html#cb9-1"></a><span class="co"># Get the data</span></span>
-<span id="cb9-2"><a href="p-spline.html#cb9-2"></a><span class="kw">data</span>(ethanol)</span>
-<span id="cb9-3"><a href="p-spline.html#cb9-3"></a></span>
-<span id="cb9-4"><a href="p-spline.html#cb9-4"></a><span class="co"># Basis matrix for compression ratio (C)</span></span>
-<span id="cb9-5"><a href="p-spline.html#cb9-5"></a>clo =<span class="st"> </span><span class="fl">7.5</span></span>
-<span id="cb9-6"><a href="p-spline.html#cb9-6"></a>chi =<span class="st"> </span><span class="dv">18</span></span>
-<span id="cb9-7"><a href="p-spline.html#cb9-7"></a>ngrid =<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb9-8"><a href="p-spline.html#cb9-8"></a>B1 =<span class="st"> </span><span class="kw">bbase</span>(ethanol<span class="op">$</span>C, clo, chi)</span>
-<span id="cb9-9"><a href="p-spline.html#cb9-9"></a></span>
-<span id="cb9-10"><a href="p-spline.html#cb9-10"></a><span class="co"># Basis matrix for equivalenc ratio (E)</span></span>
-<span id="cb9-11"><a href="p-spline.html#cb9-11"></a>elo =<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb9-12"><a href="p-spline.html#cb9-12"></a>ehi =<span class="st"> </span><span class="fl">1.25</span></span>
-<span id="cb9-13"><a href="p-spline.html#cb9-13"></a>B2 =<span class="st"> </span><span class="kw">bbase</span>(ethanol<span class="op">$</span>E, elo, ehi)</span>
-<span id="cb9-14"><a href="p-spline.html#cb9-14"></a></span>
-<span id="cb9-15"><a href="p-spline.html#cb9-15"></a><span class="co"># Penalty matrix</span></span>
-<span id="cb9-16"><a href="p-spline.html#cb9-16"></a>n =<span class="st"> </span><span class="kw">ncol</span>(B1)</span>
-<span id="cb9-17"><a href="p-spline.html#cb9-17"></a>D =<span class="st"> </span><span class="kw">diff</span>(<span class="kw">diag</span>(n), <span class="dt">diff =</span> <span class="dv">2</span>)</span>
-<span id="cb9-18"><a href="p-spline.html#cb9-18"></a>r1 =<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</span>
-<span id="cb9-19"><a href="p-spline.html#cb9-19"></a>r2 =<span class="st"> </span>r1 <span class="op">+</span><span class="st"> </span>n</span>
-<span id="cb9-20"><a href="p-spline.html#cb9-20"></a>lambdas =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>)</span>
-<span id="cb9-21"><a href="p-spline.html#cb9-21"></a>P =<span class="st"> </span><span class="kw">kronecker</span>(<span class="kw">diag</span>(lambdas), <span class="kw">t</span>(D) <span class="op">%*%</span><span class="st"> </span>D)</span>
-<span id="cb9-22"><a href="p-spline.html#cb9-22"></a>P =<span class="st"> </span>P <span class="op">+</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span><span class="fl">1e-06</span></span>
-<span id="cb9-23"><a href="p-spline.html#cb9-23"></a></span>
-<span id="cb9-24"><a href="p-spline.html#cb9-24"></a><span class="co"># Fit the model</span></span>
-<span id="cb9-25"><a href="p-spline.html#cb9-25"></a>B =<span class="st"> </span><span class="kw">cbind</span>(B1, B2)</span>
-<span id="cb9-26"><a href="p-spline.html#cb9-26"></a>y =<span class="st"> </span>ethanol<span class="op">$</span>NOx</span>
-<span id="cb9-27"><a href="p-spline.html#cb9-27"></a>a =<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(B) <span class="op">%*%</span><span class="st"> </span>B <span class="op">+</span><span class="st"> </span>P, <span class="kw">t</span>(B) <span class="op">%*%</span><span class="st"> </span>y)</span>
-<span id="cb9-28"><a href="p-spline.html#cb9-28"></a>mu =<span class="st"> </span>B <span class="op">%*%</span><span class="st"> </span>a</span>
-<span id="cb9-29"><a href="p-spline.html#cb9-29"></a><span class="kw">cat</span>(<span class="st">&#39;SD of residuals:&#39;</span>, <span class="kw">sd</span>(y <span class="op">-</span><span class="st"> </span>mu), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
-<pre><code>## SD of residuals: 0.2242995</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="p-spline.html#cb11-1"></a><span class="co"># Add fitted components to data frame (for ggplot)</span></span>
-<span id="cb11-2"><a href="p-spline.html#cb11-2"></a>Fmod =<span class="st"> </span>ethanol</span>
-<span id="cb11-3"><a href="p-spline.html#cb11-3"></a>Fmod<span class="op">$</span>f1 =<span class="st"> </span>B1 <span class="op">%*%</span><span class="st"> </span>a[r1]</span>
-<span id="cb11-4"><a href="p-spline.html#cb11-4"></a>Fmod<span class="op">$</span>f2 =<span class="st"> </span>B2 <span class="op">%*%</span><span class="st"> </span>a[r2]</span>
-<span id="cb11-5"><a href="p-spline.html#cb11-5"></a></span>
-<span id="cb11-6"><a href="p-spline.html#cb11-6"></a><span class="co"># Model fit on fine grid</span></span>
-<span id="cb11-7"><a href="p-spline.html#cb11-7"></a>cgrid =<span class="st"> </span><span class="kw">seq</span>(clo, chi, <span class="dt">length =</span> ngrid)</span>
-<span id="cb11-8"><a href="p-spline.html#cb11-8"></a>Bg1 =<span class="st"> </span><span class="kw">bbase</span>(cgrid, clo, chi)</span>
-<span id="cb11-9"><a href="p-spline.html#cb11-9"></a>egrid =<span class="st"> </span><span class="kw">seq</span>(elo, ehi, <span class="dt">length =</span> ngrid)</span>
-<span id="cb11-10"><a href="p-spline.html#cb11-10"></a>Bg2 =<span class="st"> </span><span class="kw">bbase</span>(egrid, elo, ehi)</span>
-<span id="cb11-11"><a href="p-spline.html#cb11-11"></a>zc =<span class="st"> </span>Bg1 <span class="op">%*%</span><span class="st"> </span>a[r1]</span>
-<span id="cb11-12"><a href="p-spline.html#cb11-12"></a>ze =<span class="st"> </span>Bg2 <span class="op">%*%</span><span class="st"> </span>a[r2]</span>
-<span id="cb11-13"><a href="p-spline.html#cb11-13"></a></span>
-<span id="cb11-14"><a href="p-spline.html#cb11-14"></a><span class="co"># Fill data frames for ggplot</span></span>
-<span id="cb11-15"><a href="p-spline.html#cb11-15"></a>Fc =<span class="st"> </span><span class="kw">data.frame</span>(cgrid, zc)</span>
-<span id="cb11-16"><a href="p-spline.html#cb11-16"></a>Fe =<span class="st"> </span><span class="kw">data.frame</span>(egrid, ze)</span>
-<span id="cb11-17"><a href="p-spline.html#cb11-17"></a></span>
-<span id="cb11-18"><a href="p-spline.html#cb11-18"></a><span class="co"># Create plots</span></span>
-<span id="cb11-19"><a href="p-spline.html#cb11-19"></a>plt1 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> C, <span class="dt">y =</span> E), <span class="dt">data =</span> ethanol) <span class="op">+</span></span>
-<span id="cb11-20"><a href="p-spline.html#cb11-20"></a><span class="st">       </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;darkgrey&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-21"><a href="p-spline.html#cb11-21"></a><span class="st">       </span><span class="kw">xlab</span>(<span class="st">&quot;Compression ratio (C)&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-22"><a href="p-spline.html#cb11-22"></a><span class="st">       </span><span class="kw">ylab</span>(<span class="st">&quot;Equivalence ratio (E)&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-23"><a href="p-spline.html#cb11-23"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;Experiment design&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-24"><a href="p-spline.html#cb11-24"></a><span class="st">       </span><span class="kw">JOPS_theme</span>()</span>
-<span id="cb11-25"><a href="p-spline.html#cb11-25"></a></span>
-<span id="cb11-26"><a href="p-spline.html#cb11-26"></a>plt2 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> E, <span class="dt">y =</span> NOx <span class="op">-</span><span class="st"> </span>f1), <span class="dt">data =</span> Fmod) <span class="op">+</span></span>
-<span id="cb11-27"><a href="p-spline.html#cb11-27"></a><span class="st">       </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;darkgrey&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-28"><a href="p-spline.html#cb11-28"></a><span class="st">       </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> egrid, <span class="dt">y =</span> ze), <span class="dt">data =</span> Fe, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-29"><a href="p-spline.html#cb11-29"></a><span class="st">       </span><span class="kw">xlab</span>(<span class="st">&quot;Equivalence ratio&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-30"><a href="p-spline.html#cb11-30"></a><span class="st">       </span><span class="kw">ylab</span>(<span class="st">&quot;Partial residuals&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-31"><a href="p-spline.html#cb11-31"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;Partial response&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-32"><a href="p-spline.html#cb11-32"></a><span class="st">       </span><span class="kw">JOPS_theme</span>()</span>
-<span id="cb11-33"><a href="p-spline.html#cb11-33"></a></span>
-<span id="cb11-34"><a href="p-spline.html#cb11-34"></a>plt3 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> C, <span class="dt">y =</span> NOx <span class="op">-</span><span class="st"> </span>f2), <span class="dt">data =</span> Fmod) <span class="op">+</span></span>
-<span id="cb11-35"><a href="p-spline.html#cb11-35"></a><span class="st">       </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;darkgrey&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-36"><a href="p-spline.html#cb11-36"></a><span class="st">       </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cgrid, <span class="dt">y =</span> zc), <span class="dt">data =</span> Fc, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb11-37"><a href="p-spline.html#cb11-37"></a><span class="st">       </span><span class="kw">xlab</span>(<span class="st">&quot;Compression ratio (C)&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-38"><a href="p-spline.html#cb11-38"></a><span class="st">       </span><span class="kw">ylab</span>(<span class="st">&quot;Partial residuals&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-39"><a href="p-spline.html#cb11-39"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;Partial response&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-40"><a href="p-spline.html#cb11-40"></a><span class="st">       </span><span class="kw">JOPS_theme</span>()</span>
-<span id="cb11-41"><a href="p-spline.html#cb11-41"></a></span>
-<span id="cb11-42"><a href="p-spline.html#cb11-42"></a>plt4 =<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> f1 <span class="op">+</span><span class="st"> </span>f2, <span class="dt">y =</span> NOx), <span class="dt">data =</span> Fmod) <span class="op">+</span></span>
-<span id="cb11-43"><a href="p-spline.html#cb11-43"></a><span class="st">       </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;darkgrey&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-44"><a href="p-spline.html#cb11-44"></a><span class="st">      </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb11-45"><a href="p-spline.html#cb11-45"></a><span class="st">      </span><span class="kw">xlab</span>(<span class="st">&quot;Fitted NOx&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-46"><a href="p-spline.html#cb11-46"></a><span class="st">      </span><span class="kw">ylab</span>(<span class="st">&quot;Observed &quot;</span>) <span class="op">+</span></span>
-<span id="cb11-47"><a href="p-spline.html#cb11-47"></a><span class="st">      </span><span class="kw">ggtitle</span>(<span class="st">&quot;Compare fit to data&quot;</span>) <span class="op">+</span></span>
-<span id="cb11-48"><a href="p-spline.html#cb11-48"></a><span class="st">      </span><span class="kw">JOPS_theme</span>()</span>
-<span id="cb11-49"><a href="p-spline.html#cb11-49"></a></span>
-<span id="cb11-50"><a href="p-spline.html#cb11-50"></a><span class="co"># Make and save pdf</span></span>
-<span id="cb11-51"><a href="p-spline.html#cb11-51"></a><span class="kw">grid.arrange</span>(plt1, plt2, plt3, plt4, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="p-spline.html#cb12-1"></a><span class="kw">library</span>(SemiPar)</span>
-<span id="cb12-2"><a href="p-spline.html#cb12-2"></a><span class="kw">library</span>(reshape2)</span>
-<span id="cb12-3"><a href="p-spline.html#cb12-3"></a><span class="co"># library(ggplot2)</span></span>
-<span id="cb12-4"><a href="p-spline.html#cb12-4"></a><span class="co"># library(JOPS)</span></span>
-<span id="cb12-5"><a href="p-spline.html#cb12-5"></a><span class="kw">library</span>(metR)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="p-spline.html#cb13-1"></a><span class="co"># Image of GAM surface (Ethanol data)</span></span>
-<span id="cb13-2"><a href="p-spline.html#cb13-2"></a><span class="co"># A graph in the book &#39;Practical Smoothing. The Joys of P-splines&#39;</span></span>
-<span id="cb13-3"><a href="p-spline.html#cb13-3"></a><span class="co"># Paul Eilers and Brian Marx, 2019</span></span>
-<span id="cb13-4"><a href="p-spline.html#cb13-4"></a><span class="co"># Get the data</span></span>
-<span id="cb13-5"><a href="p-spline.html#cb13-5"></a><span class="kw">data</span>(ethanol)</span>
-<span id="cb13-6"><a href="p-spline.html#cb13-6"></a></span>
-<span id="cb13-7"><a href="p-spline.html#cb13-7"></a><span class="co"># Basis matrix for compression ratio (C)</span></span>
-<span id="cb13-8"><a href="p-spline.html#cb13-8"></a>clo =<span class="st"> </span><span class="fl">7.5</span></span>
-<span id="cb13-9"><a href="p-spline.html#cb13-9"></a>chi =<span class="st"> </span><span class="dv">18</span></span>
-<span id="cb13-10"><a href="p-spline.html#cb13-10"></a>ngrid =<span class="st"> </span><span class="dv">50</span></span>
-<span id="cb13-11"><a href="p-spline.html#cb13-11"></a>B1 =<span class="st"> </span><span class="kw">bbase</span>(ethanol<span class="op">$</span>C, clo, chi)</span>
-<span id="cb13-12"><a href="p-spline.html#cb13-12"></a></span>
-<span id="cb13-13"><a href="p-spline.html#cb13-13"></a><span class="co"># Basis matrix for equivalenc ratio (E)</span></span>
-<span id="cb13-14"><a href="p-spline.html#cb13-14"></a>elo =<span class="st"> </span><span class="fl">0.5</span></span>
-<span id="cb13-15"><a href="p-spline.html#cb13-15"></a>ehi =<span class="st"> </span><span class="fl">1.25</span></span>
-<span id="cb13-16"><a href="p-spline.html#cb13-16"></a>B2 =<span class="st"> </span><span class="kw">bbase</span>(ethanol<span class="op">$</span>E, elo, ehi)</span>
-<span id="cb13-17"><a href="p-spline.html#cb13-17"></a></span>
-<span id="cb13-18"><a href="p-spline.html#cb13-18"></a><span class="co"># Penalty matrix</span></span>
-<span id="cb13-19"><a href="p-spline.html#cb13-19"></a>n =<span class="st"> </span><span class="kw">ncol</span>(B1)</span>
-<span id="cb13-20"><a href="p-spline.html#cb13-20"></a>D =<span class="st"> </span><span class="kw">diff</span>(<span class="kw">diag</span>(n), <span class="dt">diff =</span> <span class="dv">2</span>)</span>
-<span id="cb13-21"><a href="p-spline.html#cb13-21"></a>r1 =<span class="st"> </span><span class="dv">1</span><span class="op">:</span>n</span>
-<span id="cb13-22"><a href="p-spline.html#cb13-22"></a>r2 =<span class="st"> </span>r1 <span class="op">+</span><span class="st"> </span>n</span>
-<span id="cb13-23"><a href="p-spline.html#cb13-23"></a>lambdas =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.1</span>)</span>
-<span id="cb13-24"><a href="p-spline.html#cb13-24"></a>P =<span class="st"> </span><span class="kw">kronecker</span>(<span class="kw">diag</span>(lambdas), <span class="kw">t</span>(D) <span class="op">%*%</span><span class="st"> </span>D)</span>
-<span id="cb13-25"><a href="p-spline.html#cb13-25"></a>P =<span class="st"> </span>P <span class="op">+</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>n) <span class="op">*</span><span class="st"> </span><span class="fl">1e-06</span></span>
-<span id="cb13-26"><a href="p-spline.html#cb13-26"></a></span>
-<span id="cb13-27"><a href="p-spline.html#cb13-27"></a><span class="co"># Fit the model</span></span>
-<span id="cb13-28"><a href="p-spline.html#cb13-28"></a>B =<span class="st"> </span><span class="kw">cbind</span>(B1, B2)</span>
-<span id="cb13-29"><a href="p-spline.html#cb13-29"></a>y =<span class="st"> </span>ethanol<span class="op">$</span>NOx</span>
-<span id="cb13-30"><a href="p-spline.html#cb13-30"></a>a =<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(B) <span class="op">%*%</span><span class="st"> </span>B <span class="op">+</span><span class="st"> </span>P, <span class="kw">t</span>(B) <span class="op">%*%</span><span class="st"> </span>y)</span>
-<span id="cb13-31"><a href="p-spline.html#cb13-31"></a>mu =<span class="st"> </span>B <span class="op">%*%</span><span class="st"> </span>a</span>
-<span id="cb13-32"><a href="p-spline.html#cb13-32"></a><span class="kw">cat</span>(<span class="st">&#39;SD of residuals:&#39;</span>, <span class="kw">sd</span>(y <span class="op">-</span><span class="st"> </span>mu), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span></code></pre></div>
-<pre><code>## SD of residuals: 0.2242995</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="p-spline.html#cb15-1"></a><span class="co"># Add fitted components to data frame (for ggplot)</span></span>
-<span id="cb15-2"><a href="p-spline.html#cb15-2"></a>Fmod =<span class="st"> </span>ethanol</span>
-<span id="cb15-3"><a href="p-spline.html#cb15-3"></a>Fmod<span class="op">$</span>f1 =<span class="st"> </span>B1 <span class="op">%*%</span><span class="st"> </span>a[r1]</span>
-<span id="cb15-4"><a href="p-spline.html#cb15-4"></a>Fmod<span class="op">$</span>f2 =<span class="st"> </span>B2 <span class="op">%*%</span><span class="st"> </span>a[r2]</span>
-<span id="cb15-5"><a href="p-spline.html#cb15-5"></a></span>
-<span id="cb15-6"><a href="p-spline.html#cb15-6"></a><span class="co"># Model fit on fine grid</span></span>
-<span id="cb15-7"><a href="p-spline.html#cb15-7"></a>cgrid =<span class="st"> </span><span class="kw">seq</span>(clo, chi, <span class="dt">length =</span> ngrid)</span>
-<span id="cb15-8"><a href="p-spline.html#cb15-8"></a>Bg1 =<span class="st"> </span><span class="kw">bbase</span>(cgrid, clo, chi)</span>
-<span id="cb15-9"><a href="p-spline.html#cb15-9"></a>egrid =<span class="st"> </span><span class="kw">seq</span>(elo, ehi, <span class="dt">length =</span> ngrid)</span>
-<span id="cb15-10"><a href="p-spline.html#cb15-10"></a>Bg2 =<span class="st"> </span><span class="kw">bbase</span>(egrid, elo, ehi)</span>
-<span id="cb15-11"><a href="p-spline.html#cb15-11"></a>zc =<span class="st"> </span>Bg1 <span class="op">%*%</span><span class="st"> </span>a[r1]</span>
-<span id="cb15-12"><a href="p-spline.html#cb15-12"></a>ze =<span class="st"> </span>Bg2 <span class="op">%*%</span><span class="st"> </span>a[r2]</span>
-<span id="cb15-13"><a href="p-spline.html#cb15-13"></a>Fit =<span class="st"> </span><span class="kw">outer</span>(<span class="kw">c</span>(zc), <span class="kw">c</span>(ze), <span class="st">&quot;+&quot;</span>)</span>
-<span id="cb15-14"><a href="p-spline.html#cb15-14"></a></span>
-<span id="cb15-15"><a href="p-spline.html#cb15-15"></a><span class="co"># Fill data frames for ggplot</span></span>
-<span id="cb15-16"><a href="p-spline.html#cb15-16"></a>Fc =<span class="st"> </span><span class="kw">data.frame</span>(cgrid, zc)</span>
-<span id="cb15-17"><a href="p-spline.html#cb15-17"></a>Fe =<span class="st"> </span><span class="kw">data.frame</span>(egrid, ze)</span>
-<span id="cb15-18"><a href="p-spline.html#cb15-18"></a></span>
-<span id="cb15-19"><a href="p-spline.html#cb15-19"></a><span class="co"># Data frame for plotting data points with signs of residuals</span></span>
-<span id="cb15-20"><a href="p-spline.html#cb15-20"></a>x =<span class="st"> </span>ethanol<span class="op">$</span>C</span>
-<span id="cb15-21"><a href="p-spline.html#cb15-21"></a>y =<span class="st"> </span>ethanol<span class="op">$</span>E</span>
-<span id="cb15-22"><a href="p-spline.html#cb15-22"></a>z =<span class="st"> </span>ethanol<span class="op">$</span>NOx</span>
-<span id="cb15-23"><a href="p-spline.html#cb15-23"></a>cols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;yellow&quot;</span>)[(z <span class="op">&gt;</span><span class="st"> </span>mu) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</span>
-<span id="cb15-24"><a href="p-spline.html#cb15-24"></a>pchs =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>)[(z <span class="op">&gt;</span><span class="st"> </span>mu) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]</span>
-<span id="cb15-25"><a href="p-spline.html#cb15-25"></a>Data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">cols =</span> cols, <span class="dt">pchs =</span> pchs, <span class="dt">NOx =</span> z)</span>
-<span id="cb15-26"><a href="p-spline.html#cb15-26"></a></span>
-<span id="cb15-27"><a href="p-spline.html#cb15-27"></a><span class="co"># Turn matrix into a &quot;long&quot; data frame</span></span>
-<span id="cb15-28"><a href="p-spline.html#cb15-28"></a>Mu =<span class="st"> </span>Fit</span>
-<span id="cb15-29"><a href="p-spline.html#cb15-29"></a><span class="kw">rownames</span>(Mu) =<span class="st"> </span>cgrid</span>
-<span id="cb15-30"><a href="p-spline.html#cb15-30"></a><span class="kw">colnames</span>(Mu) =<span class="st"> </span>egrid</span>
-<span id="cb15-31"><a href="p-spline.html#cb15-31"></a>dens &lt;-<span class="st"> </span><span class="kw">melt</span>(Mu)</span>
-<span id="cb15-32"><a href="p-spline.html#cb15-32"></a><span class="kw">names</span>(dens) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;NOx&#39;</span>)</span>
-<span id="cb15-33"><a href="p-spline.html#cb15-33"></a></span>
-<span id="cb15-34"><a href="p-spline.html#cb15-34"></a><span class="co"># Plot fit with contours</span></span>
-<span id="cb15-35"><a href="p-spline.html#cb15-35"></a>sl =<span class="st"> </span>T</span>
-<span id="cb15-36"><a href="p-spline.html#cb15-36"></a>ccol =<span class="st"> &#39;blue&#39;</span></span>
-<span id="cb15-37"><a href="p-spline.html#cb15-37"></a>plt =<span class="st"> </span><span class="kw">ggplot</span>(dens,  <span class="kw">aes</span>(x, y, <span class="dt">fill =</span> NOx)) <span class="op">+</span></span>
-<span id="cb15-38"><a href="p-spline.html#cb15-38"></a><span class="st">       </span><span class="kw">geom_raster</span>(<span class="dt">show.legend =</span> sl) <span class="op">+</span></span>
-<span id="cb15-39"><a href="p-spline.html#cb15-39"></a><span class="st">       </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">terrain.colors</span>(<span class="dv">100</span>))<span class="op">+</span></span>
-<span id="cb15-40"><a href="p-spline.html#cb15-40"></a><span class="st">       </span><span class="kw">geom_contour</span>(<span class="dt">data =</span> dens, <span class="kw">aes</span>(<span class="dt">z =</span> NOx), <span class="dt">color =</span> ccol, <span class="dt">show.legend =</span> T) <span class="op">+</span></span>
-<span id="cb15-41"><a href="p-spline.html#cb15-41"></a><span class="st">       </span><span class="kw">geom_text_contour</span>(<span class="kw">aes</span>(<span class="dt">z =</span> NOx), <span class="dt">color =</span> ccol, <span class="dt">size =</span> <span class="dv">3</span>)  <span class="op">+</span></span>
-<span id="cb15-42"><a href="p-spline.html#cb15-42"></a><span class="st">       </span><span class="kw">ylab</span>(<span class="st">&#39;Equivalence ratio&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&#39;Compression ratio&#39;</span>) <span class="op">+</span></span>
-<span id="cb15-43"><a href="p-spline.html#cb15-43"></a><span class="st">       </span><span class="kw">ggtitle</span>(<span class="st">&quot;GAM for NOx emission, ethanol data&quot;</span>) <span class="op">+</span></span>
-<span id="cb15-44"><a href="p-spline.html#cb15-44"></a><span class="st">       </span><span class="kw">geom_point</span>(<span class="dt">data =</span> Data, <span class="kw">aes</span>(<span class="dt">x =</span>x, <span class="dt">y =</span> y),  <span class="dt">shape =</span> pchs, <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span></span>
-<span id="cb15-45"><a href="p-spline.html#cb15-45"></a><span class="st">       </span><span class="kw">JOPS_theme</span>() <span class="op">+</span></span>
-<span id="cb15-46"><a href="p-spline.html#cb15-46"></a><span class="st">       </span><span class="kw">theme</span>(<span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb15-47"><a href="p-spline.html#cb15-47"></a>             <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb15-48"><a href="p-spline.html#cb15-48"></a>             <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>),</span>
-<span id="cb15-49"><a href="p-spline.html#cb15-49"></a>             <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>),</span>
-<span id="cb15-50"><a href="p-spline.html#cb15-50"></a>             <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">16</span>))</span>
-<span id="cb15-51"><a href="p-spline.html#cb15-51"></a></span>
-<span id="cb15-52"><a href="p-spline.html#cb15-52"></a><span class="kw">print</span>(plt)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-
 </div>
 </div>
             </section>
@@ -455,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="spatial-interpolation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multidimensional-smoothing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

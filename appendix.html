@@ -36,7 +36,7 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="spatial-interpolation.html"/>
+<link rel="prev" href="multidimensional-smoothing.html"/>
 <link rel="next" href="cross.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -151,7 +151,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="p-spline.html"><a href="p-spline.html"><i class="fa fa-check"></i><b>2</b> P-Spline<span></span></a><ul>
 <li class="chapter" data-level="2.1" data-path="p-spline.html"><a href="p-spline.html#mixed-model"><i class="fa fa-check"></i><b>2.1</b> mixed model<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="spatial-interpolation.html"><a href="spatial-interpolation.html"><i class="fa fa-check"></i><b>3</b> Spatial Interpolation<span></span></a></li>
+<li class="chapter" data-level="3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html"><i class="fa fa-check"></i><b>3</b> Multidimensional Smoothing<span></span></a><ul>
+<li class="chapter" data-level="3.1" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.1"><i class="fa fa-check"></i><b>3.1</b> Figure 4.1<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.2"><i class="fa fa-check"></i><b>3.2</b> Figure 4.2<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.8"><i class="fa fa-check"></i><b>3.3</b> Figure 4.8<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.9"><i class="fa fa-check"></i><b>3.4</b> Figure 4.9<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.10"><i class="fa fa-check"></i><b>3.5</b> Figure 4.10<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.11"><i class="fa fa-check"></i><b>3.6</b> Figure 4.11<span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix<span></span></a></li>
 <li class="chapter" data-level="5" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>5</b> Cross-references<span></span></a><ul>
 <li class="chapter" data-level="5.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>5.1</b> Chapters and sub-chapters<span></span></a></li>
@@ -191,40 +198,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="appendix" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 4</span> Appendix<a href="appendix.html#appendix" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Figure E.1:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="appendix.html#cb26-1"></a><span class="co"># Plots for optimal smoothing (Old Faithful geyser data)</span></span>
-<span id="cb26-2"><a href="appendix.html#cb26-2"></a><span class="co"># A graph in the book &#39;Practical Smoothing. The Joys of P-splines&#39;</span></span>
-<span id="cb26-3"><a href="appendix.html#cb26-3"></a><span class="co"># Paul Eilers and Brian Marx, 2019</span></span>
-<span id="cb26-4"><a href="appendix.html#cb26-4"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb26-5"><a href="appendix.html#cb26-5"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb26-6"><a href="appendix.html#cb26-6"></a><span class="kw">library</span>(JOPS)</span>
-<span id="cb26-7"><a href="appendix.html#cb26-7"></a><span class="kw">library</span>(MASS)</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="appendix.html#cb27-1"></a><span class="co"># Get the data</span></span>
-<span id="cb27-2"><a href="appendix.html#cb27-2"></a><span class="kw">data</span>(faithful)</span>
-<span id="cb27-3"><a href="appendix.html#cb27-3"></a>u =<span class="st"> </span>faithful[, <span class="dv">1</span>]  <span class="co"># Eruption length</span></span>
-<span id="cb27-4"><a href="appendix.html#cb27-4"></a>bw1 =<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb27-5"><a href="appendix.html#cb27-5"></a>brks1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dt">by =</span> bw1)</span>
-<span id="cb27-6"><a href="appendix.html#cb27-6"></a>h =<span class="st"> </span><span class="kw">hist</span>(u, <span class="dt">breaks =</span> brks1, <span class="dt">plot =</span> F)</span>
-<span id="cb27-7"><a href="appendix.html#cb27-7"></a>x =<span class="st"> </span>h<span class="op">$</span>mids</span>
-<span id="cb27-8"><a href="appendix.html#cb27-8"></a>y =<span class="st"> </span>h<span class="op">$</span>counts</span>
-<span id="cb27-9"><a href="appendix.html#cb27-9"></a>Data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
-<span id="cb27-10"><a href="appendix.html#cb27-10"></a>Dat =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">u =</span> u)</span>
-<span id="cb27-11"><a href="appendix.html#cb27-11"></a>nseg =<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb27-12"><a href="appendix.html#cb27-12"></a>lambda =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb27-13"><a href="appendix.html#cb27-13"></a>d =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb27-14"><a href="appendix.html#cb27-14"></a></span>
-<span id="cb27-15"><a href="appendix.html#cb27-15"></a><span class="co"># Iterative Poisson smoothing, updating tuning based on diff of coeffs</span></span>
-<span id="cb27-16"><a href="appendix.html#cb27-16"></a>aics =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb27-17"><a href="appendix.html#cb27-17"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
-<span id="cb27-18"><a href="appendix.html#cb27-18"></a>    fit =<span class="st"> </span><span class="kw">psPoisson</span>(x, y, <span class="dt">nseg =</span> nseg, <span class="dt">pord =</span> d, <span class="dt">lambda =</span> lambda, <span class="dt">show =</span> F)</span>
-<span id="cb27-19"><a href="appendix.html#cb27-19"></a>    a =<span class="st"> </span>fit<span class="op">$</span>pcoef</span>
-<span id="cb27-20"><a href="appendix.html#cb27-20"></a>    vr =<span class="st"> </span><span class="kw">sum</span>((<span class="kw">diff</span>(a, <span class="dt">diff =</span> d))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>fit<span class="op">$</span>effdim</span>
-<span id="cb27-21"><a href="appendix.html#cb27-21"></a>    lambda_new =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>vr</span>
-<span id="cb27-22"><a href="appendix.html#cb27-22"></a>    dla =<span class="st"> </span><span class="kw">abs</span>((lambda_new <span class="op">-</span><span class="st"> </span>lambda)<span class="op">/</span>lambda)</span>
-<span id="cb27-23"><a href="appendix.html#cb27-23"></a>    lambda =<span class="st"> </span>lambda_new</span>
-<span id="cb27-24"><a href="appendix.html#cb27-24"></a>    <span class="kw">cat</span>(it, <span class="kw">log10</span>(lambda), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb27-25"><a href="appendix.html#cb27-25"></a>    <span class="cf">if</span> (dla <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-05</span>)</span>
-<span id="cb27-26"><a href="appendix.html#cb27-26"></a>        <span class="cf">break</span></span>
-<span id="cb27-27"><a href="appendix.html#cb27-27"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="appendix.html#cb28-1"></a><span class="co"># Plots for optimal smoothing (Old Faithful geyser data)</span></span>
+<span id="cb28-2"><a href="appendix.html#cb28-2"></a><span class="co"># A graph in the book &#39;Practical Smoothing. The Joys of P-splines&#39;</span></span>
+<span id="cb28-3"><a href="appendix.html#cb28-3"></a><span class="co"># Paul Eilers and Brian Marx, 2019</span></span>
+<span id="cb28-4"><a href="appendix.html#cb28-4"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb28-5"><a href="appendix.html#cb28-5"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb28-6"><a href="appendix.html#cb28-6"></a><span class="kw">library</span>(JOPS)</span>
+<span id="cb28-7"><a href="appendix.html#cb28-7"></a><span class="kw">library</span>(MASS)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="appendix.html#cb29-1"></a><span class="co"># Get the data</span></span>
+<span id="cb29-2"><a href="appendix.html#cb29-2"></a><span class="kw">data</span>(faithful)</span>
+<span id="cb29-3"><a href="appendix.html#cb29-3"></a>u =<span class="st"> </span>faithful[, <span class="dv">1</span>]  <span class="co"># Eruption length</span></span>
+<span id="cb29-4"><a href="appendix.html#cb29-4"></a>bw1 =<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb29-5"><a href="appendix.html#cb29-5"></a>brks1 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dt">by =</span> bw1)</span>
+<span id="cb29-6"><a href="appendix.html#cb29-6"></a>h =<span class="st"> </span><span class="kw">hist</span>(u, <span class="dt">breaks =</span> brks1, <span class="dt">plot =</span> F)</span>
+<span id="cb29-7"><a href="appendix.html#cb29-7"></a>x =<span class="st"> </span>h<span class="op">$</span>mids</span>
+<span id="cb29-8"><a href="appendix.html#cb29-8"></a>y =<span class="st"> </span>h<span class="op">$</span>counts</span>
+<span id="cb29-9"><a href="appendix.html#cb29-9"></a>Data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
+<span id="cb29-10"><a href="appendix.html#cb29-10"></a>Dat =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">u =</span> u)</span>
+<span id="cb29-11"><a href="appendix.html#cb29-11"></a>nseg =<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb29-12"><a href="appendix.html#cb29-12"></a>lambda =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb29-13"><a href="appendix.html#cb29-13"></a>d =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb29-14"><a href="appendix.html#cb29-14"></a></span>
+<span id="cb29-15"><a href="appendix.html#cb29-15"></a><span class="co"># Iterative Poisson smoothing, updating tuning based on diff of coeffs</span></span>
+<span id="cb29-16"><a href="appendix.html#cb29-16"></a>aics =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb29-17"><a href="appendix.html#cb29-17"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
+<span id="cb29-18"><a href="appendix.html#cb29-18"></a>    fit =<span class="st"> </span><span class="kw">psPoisson</span>(x, y, <span class="dt">nseg =</span> nseg, <span class="dt">pord =</span> d, <span class="dt">lambda =</span> lambda, <span class="dt">show =</span> F)</span>
+<span id="cb29-19"><a href="appendix.html#cb29-19"></a>    a =<span class="st"> </span>fit<span class="op">$</span>pcoef</span>
+<span id="cb29-20"><a href="appendix.html#cb29-20"></a>    vr =<span class="st"> </span><span class="kw">sum</span>((<span class="kw">diff</span>(a, <span class="dt">diff =</span> d))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>fit<span class="op">$</span>effdim</span>
+<span id="cb29-21"><a href="appendix.html#cb29-21"></a>    lambda_new =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>vr</span>
+<span id="cb29-22"><a href="appendix.html#cb29-22"></a>    dla =<span class="st"> </span><span class="kw">abs</span>((lambda_new <span class="op">-</span><span class="st"> </span>lambda)<span class="op">/</span>lambda)</span>
+<span id="cb29-23"><a href="appendix.html#cb29-23"></a>    lambda =<span class="st"> </span>lambda_new</span>
+<span id="cb29-24"><a href="appendix.html#cb29-24"></a>    <span class="kw">cat</span>(it, <span class="kw">log10</span>(lambda), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb29-25"><a href="appendix.html#cb29-25"></a>    <span class="cf">if</span> (dla <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-05</span>)</span>
+<span id="cb29-26"><a href="appendix.html#cb29-26"></a>        <span class="cf">break</span></span>
+<span id="cb29-27"><a href="appendix.html#cb29-27"></a>}</span></code></pre></div>
 <pre><code>## 1 0.04461179 
 ## 2 0.06014879 
 ## 3 0.06558028 
@@ -235,41 +242,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8 0.06849368 
 ## 9 0.06850375 
 ## 10 0.06850728</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="appendix.html#cb29-1"></a><span class="co"># Gridded data for plotting</span></span>
-<span id="cb29-2"><a href="appendix.html#cb29-2"></a>Fit1 =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> fit<span class="op">$</span>xgrid, <span class="dt">y =</span> fit<span class="op">$</span>mugrid)</span>
-<span id="cb29-3"><a href="appendix.html#cb29-3"></a></span>
-<span id="cb29-4"><a href="appendix.html#cb29-4"></a>plt1 =<span class="st"> </span><span class="kw">ggplot</span>(Dat, <span class="kw">aes</span>(u)) <span class="op">+</span></span>
-<span id="cb29-5"><a href="appendix.html#cb29-5"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill =</span> <span class="st">&quot;wheat3&quot;</span>, <span class="dt">breaks =</span> brks1)<span class="op">+</span></span>
-<span id="cb29-6"><a href="appendix.html#cb29-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb29-7"><a href="appendix.html#cb29-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Eruption length (min.)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span></span>
-<span id="cb29-8"><a href="appendix.html#cb29-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Old Faithtful; mixed model smooth; bin width&quot;</span>, bw1, <span class="st">&quot;min.&quot;</span>)) <span class="op">+</span></span>
-<span id="cb29-9"><a href="appendix.html#cb29-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> Fit1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb29-10"><a href="appendix.html#cb29-10"></a><span class="st">  </span><span class="kw">JOPS_theme</span>()</span>
-<span id="cb29-11"><a href="appendix.html#cb29-11"></a></span>
-<span id="cb29-12"><a href="appendix.html#cb29-12"></a><span class="co"># Second histogram</span></span>
-<span id="cb29-13"><a href="appendix.html#cb29-13"></a>bw2 =<span class="st"> </span><span class="fl">0.02</span></span>
-<span id="cb29-14"><a href="appendix.html#cb29-14"></a>brks2 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dt">by =</span> bw2)</span>
-<span id="cb29-15"><a href="appendix.html#cb29-15"></a>h =<span class="st"> </span><span class="kw">hist</span>(u, <span class="dt">breaks =</span> brks2, <span class="dt">plot =</span> F)</span>
-<span id="cb29-16"><a href="appendix.html#cb29-16"></a>x =<span class="st"> </span>h<span class="op">$</span>mids</span>
-<span id="cb29-17"><a href="appendix.html#cb29-17"></a>y =<span class="st"> </span>h<span class="op">$</span>counts</span>
-<span id="cb29-18"><a href="appendix.html#cb29-18"></a>Data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
-<span id="cb29-19"><a href="appendix.html#cb29-19"></a></span>
-<span id="cb29-20"><a href="appendix.html#cb29-20"></a>nseg =<span class="st"> </span><span class="dv">20</span></span>
-<span id="cb29-21"><a href="appendix.html#cb29-21"></a>lambda =<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb29-22"><a href="appendix.html#cb29-22"></a>d =<span class="st"> </span><span class="dv">3</span></span>
-<span id="cb29-23"><a href="appendix.html#cb29-23"></a></span>
-<span id="cb29-24"><a href="appendix.html#cb29-24"></a><span class="co"># Iterative Poisson smoothing, HFS tuning of lambda</span></span>
-<span id="cb29-25"><a href="appendix.html#cb29-25"></a>aics =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb29-26"><a href="appendix.html#cb29-26"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
-<span id="cb29-27"><a href="appendix.html#cb29-27"></a>  fit =<span class="st"> </span><span class="kw">psPoisson</span>(x, y, <span class="dt">nseg =</span> nseg, <span class="dt">pord =</span> d, <span class="dt">lambda =</span> lambda, <span class="dt">show =</span> F)</span>
-<span id="cb29-28"><a href="appendix.html#cb29-28"></a>  a =<span class="st"> </span>fit<span class="op">$</span>pcoef</span>
-<span id="cb29-29"><a href="appendix.html#cb29-29"></a>  vr =<span class="st"> </span><span class="kw">sum</span>((<span class="kw">diff</span>(a, <span class="dt">diff =</span> d)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>fit<span class="op">$</span>effdim</span>
-<span id="cb29-30"><a href="appendix.html#cb29-30"></a>  lambda_new =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>vr</span>
-<span id="cb29-31"><a href="appendix.html#cb29-31"></a>  dla =<span class="st"> </span><span class="kw">abs</span>((lambda_new <span class="op">-</span><span class="st"> </span>lambda) <span class="op">/</span>lambda)</span>
-<span id="cb29-32"><a href="appendix.html#cb29-32"></a>  lambda =<span class="st"> </span>lambda_new</span>
-<span id="cb29-33"><a href="appendix.html#cb29-33"></a>  <span class="kw">cat</span>(it, <span class="kw">log10</span>(lambda), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb29-34"><a href="appendix.html#cb29-34"></a>  <span class="cf">if</span>  (dla <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-5</span>) <span class="cf">break</span></span>
-<span id="cb29-35"><a href="appendix.html#cb29-35"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="appendix.html#cb31-1"></a><span class="co"># Gridded data for plotting</span></span>
+<span id="cb31-2"><a href="appendix.html#cb31-2"></a>Fit1 =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> fit<span class="op">$</span>xgrid, <span class="dt">y =</span> fit<span class="op">$</span>mugrid)</span>
+<span id="cb31-3"><a href="appendix.html#cb31-3"></a></span>
+<span id="cb31-4"><a href="appendix.html#cb31-4"></a>plt1 =<span class="st"> </span><span class="kw">ggplot</span>(Dat, <span class="kw">aes</span>(u)) <span class="op">+</span></span>
+<span id="cb31-5"><a href="appendix.html#cb31-5"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill =</span> <span class="st">&quot;wheat3&quot;</span>, <span class="dt">breaks =</span> brks1)<span class="op">+</span></span>
+<span id="cb31-6"><a href="appendix.html#cb31-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb31-7"><a href="appendix.html#cb31-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Eruption length (min.)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span></span>
+<span id="cb31-8"><a href="appendix.html#cb31-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Old Faithtful; mixed model smooth; bin width&quot;</span>, bw1, <span class="st">&quot;min.&quot;</span>)) <span class="op">+</span></span>
+<span id="cb31-9"><a href="appendix.html#cb31-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> Fit1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb31-10"><a href="appendix.html#cb31-10"></a><span class="st">  </span><span class="kw">JOPS_theme</span>()</span>
+<span id="cb31-11"><a href="appendix.html#cb31-11"></a></span>
+<span id="cb31-12"><a href="appendix.html#cb31-12"></a><span class="co"># Second histogram</span></span>
+<span id="cb31-13"><a href="appendix.html#cb31-13"></a>bw2 =<span class="st"> </span><span class="fl">0.02</span></span>
+<span id="cb31-14"><a href="appendix.html#cb31-14"></a>brks2 =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dt">by =</span> bw2)</span>
+<span id="cb31-15"><a href="appendix.html#cb31-15"></a>h =<span class="st"> </span><span class="kw">hist</span>(u, <span class="dt">breaks =</span> brks2, <span class="dt">plot =</span> F)</span>
+<span id="cb31-16"><a href="appendix.html#cb31-16"></a>x =<span class="st"> </span>h<span class="op">$</span>mids</span>
+<span id="cb31-17"><a href="appendix.html#cb31-17"></a>y =<span class="st"> </span>h<span class="op">$</span>counts</span>
+<span id="cb31-18"><a href="appendix.html#cb31-18"></a>Data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
+<span id="cb31-19"><a href="appendix.html#cb31-19"></a></span>
+<span id="cb31-20"><a href="appendix.html#cb31-20"></a>nseg =<span class="st"> </span><span class="dv">20</span></span>
+<span id="cb31-21"><a href="appendix.html#cb31-21"></a>lambda =<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb31-22"><a href="appendix.html#cb31-22"></a>d =<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb31-23"><a href="appendix.html#cb31-23"></a></span>
+<span id="cb31-24"><a href="appendix.html#cb31-24"></a><span class="co"># Iterative Poisson smoothing, HFS tuning of lambda</span></span>
+<span id="cb31-25"><a href="appendix.html#cb31-25"></a>aics =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb31-26"><a href="appendix.html#cb31-26"></a><span class="cf">for</span> (it <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">20</span>) {</span>
+<span id="cb31-27"><a href="appendix.html#cb31-27"></a>  fit =<span class="st"> </span><span class="kw">psPoisson</span>(x, y, <span class="dt">nseg =</span> nseg, <span class="dt">pord =</span> d, <span class="dt">lambda =</span> lambda, <span class="dt">show =</span> F)</span>
+<span id="cb31-28"><a href="appendix.html#cb31-28"></a>  a =<span class="st"> </span>fit<span class="op">$</span>pcoef</span>
+<span id="cb31-29"><a href="appendix.html#cb31-29"></a>  vr =<span class="st"> </span><span class="kw">sum</span>((<span class="kw">diff</span>(a, <span class="dt">diff =</span> d)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>fit<span class="op">$</span>effdim</span>
+<span id="cb31-30"><a href="appendix.html#cb31-30"></a>  lambda_new =<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>vr</span>
+<span id="cb31-31"><a href="appendix.html#cb31-31"></a>  dla =<span class="st"> </span><span class="kw">abs</span>((lambda_new <span class="op">-</span><span class="st"> </span>lambda) <span class="op">/</span>lambda)</span>
+<span id="cb31-32"><a href="appendix.html#cb31-32"></a>  lambda =<span class="st"> </span>lambda_new</span>
+<span id="cb31-33"><a href="appendix.html#cb31-33"></a>  <span class="kw">cat</span>(it, <span class="kw">log10</span>(lambda), <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb31-34"><a href="appendix.html#cb31-34"></a>  <span class="cf">if</span>  (dla <span class="op">&lt;</span><span class="st"> </span><span class="fl">1e-5</span>) <span class="cf">break</span></span>
+<span id="cb31-35"><a href="appendix.html#cb31-35"></a>}</span></code></pre></div>
 <pre><code>## 1 0.02176114 
 ## 2 0.02987864 
 ## 3 0.03290564 
@@ -280,20 +287,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8 0.03469275 
 ## 9 0.03470089 
 ## 10 0.03470393</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="appendix.html#cb31-1"></a><span class="co"># Gridded data for plotting</span></span>
-<span id="cb31-2"><a href="appendix.html#cb31-2"></a>Fit1 =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> fit<span class="op">$</span>xgrid, <span class="dt">y =</span> fit<span class="op">$</span>mugrid)</span>
-<span id="cb31-3"><a href="appendix.html#cb31-3"></a></span>
-<span id="cb31-4"><a href="appendix.html#cb31-4"></a>plt2 =<span class="st"> </span><span class="kw">ggplot</span>(Dat, <span class="kw">aes</span>(u)) <span class="op">+</span></span>
-<span id="cb31-5"><a href="appendix.html#cb31-5"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill =</span> <span class="st">&quot;wheat3&quot;</span>, <span class="dt">breaks =</span> brks2)<span class="op">+</span></span>
-<span id="cb31-6"><a href="appendix.html#cb31-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb31-7"><a href="appendix.html#cb31-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Eruption length (min.)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span></span>
-<span id="cb31-8"><a href="appendix.html#cb31-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Old Faithtful; mixed model smooth; bin width&quot;</span>, bw2, <span class="st">&quot;min.&quot;</span>)) <span class="op">+</span></span>
-<span id="cb31-9"><a href="appendix.html#cb31-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> Fit1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb31-10"><a href="appendix.html#cb31-10"></a><span class="st">  </span><span class="kw">JOPS_theme</span>()</span>
-<span id="cb31-11"><a href="appendix.html#cb31-11"></a></span>
-<span id="cb31-12"><a href="appendix.html#cb31-12"></a><span class="co"># Make and save graph</span></span>
-<span id="cb31-13"><a href="appendix.html#cb31-13"></a><span class="kw">grid.arrange</span>(plt2, plt1, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="appendix.html#cb33-1"></a><span class="co"># Gridded data for plotting</span></span>
+<span id="cb33-2"><a href="appendix.html#cb33-2"></a>Fit1 =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> fit<span class="op">$</span>xgrid, <span class="dt">y =</span> fit<span class="op">$</span>mugrid)</span>
+<span id="cb33-3"><a href="appendix.html#cb33-3"></a></span>
+<span id="cb33-4"><a href="appendix.html#cb33-4"></a>plt2 =<span class="st"> </span><span class="kw">ggplot</span>(Dat, <span class="kw">aes</span>(u)) <span class="op">+</span></span>
+<span id="cb33-5"><a href="appendix.html#cb33-5"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">fill =</span> <span class="st">&quot;wheat3&quot;</span>, <span class="dt">breaks =</span> brks2)<span class="op">+</span></span>
+<span id="cb33-6"><a href="appendix.html#cb33-6"></a><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb33-7"><a href="appendix.html#cb33-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Eruption length (min.)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="op">+</span></span>
+<span id="cb33-8"><a href="appendix.html#cb33-8"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">paste</span>(<span class="st">&quot;Old Faithtful; mixed model smooth; bin width&quot;</span>, bw2, <span class="st">&quot;min.&quot;</span>)) <span class="op">+</span></span>
+<span id="cb33-9"><a href="appendix.html#cb33-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> Fit1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb33-10"><a href="appendix.html#cb33-10"></a><span class="st">  </span><span class="kw">JOPS_theme</span>()</span>
+<span id="cb33-11"><a href="appendix.html#cb33-11"></a></span>
+<span id="cb33-12"><a href="appendix.html#cb33-12"></a><span class="co"># Make and save graph</span></span>
+<span id="cb33-13"><a href="appendix.html#cb33-13"></a><span class="kw">grid.arrange</span>(plt2, plt1, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 
 </div>
             </section>
@@ -301,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="spatial-interpolation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multidimensional-smoothing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="cross.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

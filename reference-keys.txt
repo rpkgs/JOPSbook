@@ -8,7 +8,13 @@ render-book
 preview-book
 p-spline
 mixed-model
-spatial-interpolation
+multidimensional-smoothing
+figure-4.1
+figure-4.2
+figure-4.8
+figure-4.9
+figure-4.10
+figure-4.11
 appendix
 cross
 chapters-and-sub-chapters

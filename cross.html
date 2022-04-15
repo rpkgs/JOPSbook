@@ -151,7 +151,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="p-spline.html"><a href="p-spline.html"><i class="fa fa-check"></i><b>2</b> P-Spline<span></span></a><ul>
 <li class="chapter" data-level="2.1" data-path="p-spline.html"><a href="p-spline.html#mixed-model"><i class="fa fa-check"></i><b>2.1</b> mixed model<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="spatial-interpolation.html"><a href="spatial-interpolation.html"><i class="fa fa-check"></i><b>3</b> Spatial Interpolation<span></span></a></li>
+<li class="chapter" data-level="3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html"><i class="fa fa-check"></i><b>3</b> Multidimensional Smoothing<span></span></a><ul>
+<li class="chapter" data-level="3.1" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.1"><i class="fa fa-check"></i><b>3.1</b> Figure 4.1<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.2"><i class="fa fa-check"></i><b>3.2</b> Figure 4.2<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.8"><i class="fa fa-check"></i><b>3.3</b> Figure 4.8<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.9"><i class="fa fa-check"></i><b>3.4</b> Figure 4.9<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.10"><i class="fa fa-check"></i><b>3.5</b> Figure 4.10<span></span></a></li>
+<li class="chapter" data-level="3.6" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.11"><i class="fa fa-check"></i><b>3.6</b> Figure 4.11<span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix<span></span></a></li>
 <li class="chapter" data-level="5" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>5</b> Cross-references<span></span></a><ul>
 <li class="chapter" data-level="5.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>5.1</b> Chapters and sub-chapters<span></span></a></li>
@@ -210,8 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> Captioned figures and tables<a href="cross.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
 <p>See Figure <a href="cross.html#fig:nice-fig">5.1</a>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="cross.html#cb32-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</span>
-<span id="cb32-2"><a href="cross.html#cb32-2"></a><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="cross.html#cb34-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</span>
+<span id="cb34-2"><a href="cross.html#cb34-2"></a><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nice-fig"></span>
 <img src="_main_files/figure-html/nice-fig-1.png" alt="Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases." width="80%" />
 <p class="caption">
@@ -219,10 +226,10 @@ Figure 5.1: Here is a nice figure!
 </p>
 </div>
 <p>Don’t miss Table <a href="cross.html#tab:nice-tab">5.1</a>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="cross.html#cb33-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
-<span id="cb33-2"><a href="cross.html#cb33-2"></a>  <span class="kw">head</span>(pressure, <span class="dv">10</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb33-3"><a href="cross.html#cb33-3"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
-<span id="cb33-4"><a href="cross.html#cb33-4"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="cross.html#cb35-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb35-2"><a href="cross.html#cb35-2"></a>  <span class="kw">head</span>(pressure, <span class="dv">10</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb35-3"><a href="cross.html#cb35-3"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
+<span id="cb35-4"><a href="cross.html#cb35-4"></a>)</span></code></pre></div>
 <table>
 <caption><span id="tab:nice-tab">Table 5.1: </span>Here is a nice table!</caption>
 <thead>
