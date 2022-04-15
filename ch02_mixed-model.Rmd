@@ -1,0 +1,56 @@
+# 线性混合模型 {#Mixed-Model}
+
+
+## 案例1
+两组CO2实验，高CO2浓度和低CO2浓度。每组3棵树（tree）、每棵树测4片叶子的气孔面积（area）。
+
+> 问题：CO2对气孔导度的影响
+
+![](image/LinearMixedModel-case01_CO2_experiment.png)
+
+### 错误的方法，固定效应模型
+```{r}
+library(JOPSbook)
+library(gamair)
+library(magrittr)
+library(data.table)
+
+data("stomata")
+stomata %<>% data.table()
+
+summary(stomata)
+print(stomata)
+```
+
+$$
+y_i = CO2 * α_j + tree * β_k + ǫ_i
+$$
+
+其中i代表第i个观测数据，j代表CO2浓度，k代表树。
+
+```{r}
+m1 <- lm(area ~ CO2 + tree, stomata)
+m0 <- lm(area ~ CO2, stomata)
+anova(m0, m1)
+```
+
+通过`anova`方差分析可以看到，tree对气孔的影响显著。
+
+```{r}
+m2 <- lm(area ~ tree, stomata)
+anova(m2, m1)
+```
+`m2`和`m1`的方差分析显示，CO2对气孔的影响也显著。CO2、tree对气孔是协同影响。
+
+```{r}
+st = stomata[, .(area = mean(area)), .(tree, CO2)]
+st
+```
+
+```{r}
+m3 <- lm(area ~ CO2, st)
+summary(m3)
+# anova(m3)
+
+summary(m3)$sigma^2 - summary(m1)$sigma^2 / 4
+```

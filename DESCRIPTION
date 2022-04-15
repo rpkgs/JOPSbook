@@ -13,8 +13,10 @@ License: MIT + file LICENSE
 Imports: 
 Suggests: 
     rmarkdown, bookdown,
+    magrittr, data.table,
     SemiPar, fields, spam, JOPS,
     reshape2, metR,
+    gamair,
     gridExtra,
     covr,
     testthat (>= 3.0.0)
