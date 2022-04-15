@@ -6,8 +6,6 @@ about
 usage
 render-book
 preview-book
-hello-bookdown
-a-section
 spatial-interpolation
 cross
 chapters-and-sub-chapters
@@ -24,3 +22,4 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+mixed-model
