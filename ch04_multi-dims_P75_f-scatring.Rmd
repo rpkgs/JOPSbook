@@ -1,3 +1,5 @@
+## Figure 4.11
+
 ```{r}
 # Smoothing scattered data with 2D P-splines (Simulated data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'

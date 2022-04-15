@@ -1,9 +1,12 @@
+## Figure 4.2
+
 ```{r}
 library(SemiPar)
 library(reshape2)
 # library(ggplot2)
 # library(JOPS)
-library(metR)
+# library(metR)
+require2(metR)
 ```
 
 ```{r}

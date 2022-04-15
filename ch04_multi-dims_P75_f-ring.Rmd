@@ -1,7 +1,8 @@
+## Figure 4.10
+```{r}
 # Smoothing ring image with array regression (Simulated data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'
 # Paul Eilers and Brian Marx, 2019
-
 library(ggplot2)
 library(JOPS)
 library(fields)
@@ -65,8 +66,4 @@ image(x, y, Z, col = cols, xlab = "", ylab = "", xaxt = "n", yaxt = "n")
 title("Data", cex.main = 1.5)
 image(x, y, Zhat, col = cols, xlab = "", ylab = "", xaxt = "n", yaxt = "n")
 title("Smoothed", cex.main = 1.5)
-
-
-
-
-
+```

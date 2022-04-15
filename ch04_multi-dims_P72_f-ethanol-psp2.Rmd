@@ -1,5 +1,4 @@
-# Spatial Interpolation
-
+## Figure 4.8
 ```{r,message=FALSE}
 library(SemiPar)
 library(fields)

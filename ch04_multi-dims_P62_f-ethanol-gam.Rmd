@@ -1,3 +1,9 @@
+# Multidimensional Smoothing
+
+> 该章节的理论有望应用于站点数据空间插值。
+
+## Figure 4.1
+
 ```{r,message=FALSE}
 # GAM smoothing (Ethanol data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'

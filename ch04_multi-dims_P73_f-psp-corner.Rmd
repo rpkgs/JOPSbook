@@ -1,3 +1,5 @@
+## Figure 4.9
+
 ```{r}
 # Tensor product P-spline fit and extrapolation (Ethanol data)
 # A graph in the book 'Practical Smoothing. The Joys of P-splines'
