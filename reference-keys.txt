@@ -6,6 +6,8 @@ about
 usage
 render-book
 preview-book
+p-spline
+mixed-model
 spatial-interpolation
 cross
 chapters-and-sub-chapters
@@ -18,8 +20,3 @@ blocks
 equations
 theorems-and-proofs
 callout-blocks
-sharing-your-book
-publishing
-pages
-metadata-for-sharing
-mixed-model
