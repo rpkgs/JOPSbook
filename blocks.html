@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Blocks | Practical Smoothing, The Joys of P-splines</title>
+  <title>Chapter 11 Blocks | Practical Smoothing, The Joys of P-splines</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Blocks | Practical Smoothing, The Joys of P-splines" />
+  <meta property="og:title" content="Chapter 11 Blocks | Practical Smoothing, The Joys of P-splines" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rpkgs/JOPSbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Blocks | Practical Smoothing, The Joys of P-splines" />
+  <meta name="twitter:title" content="Chapter 11 Blocks | Practical Smoothing, The Joys of P-splines" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="孔冬冬" />
 
 
-<meta name="date" content="2022-04-15" />
+<meta name="date" content="2022-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -143,45 +143,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Practical Smoothing, The Joys of P-splines</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#Intro">前言<span></span></a><ul>
-<li><a href="index.html#render">bookdown编译<span></span></a></li>
-<li><a href="index.html#view">bookdown预览<span></span></a></li>
-<li><a href="index.html#thinking">bookdown使用心得<span></span></a></li>
-<li><a href="index.html#author">作者简介<span></span></a></li>
-<li><a href="index.html#reference">参考文献<span></span></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#render"><i class="fa fa-check"></i>bookdown编译</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#view"><i class="fa fa-check"></i>bookdown预览</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#thinking"><i class="fa fa-check"></i>bookdown使用心得</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#author"><i class="fa fa-check"></i>作者简介</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#reference"><i class="fa fa-check"></i>参考文献</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="Mixed-Model.html"><a href="Mixed-Model.html"><i class="fa fa-check"></i><b>1</b> 线性混合模型<span></span></a><ul>
-<li class="chapter" data-level="1.1" data-path="Mixed-Model.html"><a href="Mixed-Model.html#案例1"><i class="fa fa-check"></i><b>1.1</b> 案例1<span></span></a><ul>
-<li class="chapter" data-level="1.1.1" data-path="Mixed-Model.html"><a href="Mixed-Model.html#错误的方法固定效应模型"><i class="fa fa-check"></i><b>1.1.1</b> 错误的方法，固定效应模型<span></span></a></li>
+<li class="chapter" data-level="1" data-path="最大似然估计.html"><a href="最大似然估计.html"><i class="fa fa-check"></i><b>1</b> 最大似然估计</a><ul>
+<li class="chapter" data-level="1.1" data-path="最大似然估计.html"><a href="最大似然估计.html#正态密度函数"><i class="fa fa-check"></i><b>1.1</b> <strong>正态密度函数</strong></a></li>
+<li class="chapter" data-level="1.2" data-path="最大似然估计.html"><a href="最大似然估计.html#联合密度的似然函数"><i class="fa fa-check"></i><b>1.2</b> <strong>联合密度的似然函数</strong></a></li>
+<li class="chapter" data-level="1.3" data-path="最大似然估计.html"><a href="最大似然估计.html#正态分布似然函数"><i class="fa fa-check"></i><b>1.3</b> <strong>正态分布似然函数</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="线性混合模型.html"><a href="线性混合模型.html"><i class="fa fa-check"></i><b>2</b> 线性混合模型</a><ul>
+<li class="chapter" data-level="2.1" data-path="线性混合模型.html"><a href="线性混合模型.html#lmm的似然函数"><i class="fa fa-check"></i><b>2.1</b> LMM的似然函数</a></li>
+<li class="chapter" data-level="2.2" data-path="线性混合模型.html"><a href="线性混合模型.html#r语言实战"><i class="fa fa-check"></i><b>2.2</b> R语言实战</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="线性混合模型.html"><a href="线性混合模型.html#方案1"><i class="fa fa-check"></i><b>2.2.1</b> 方案1</a></li>
+<li class="chapter" data-level="2.2.2" data-path="线性混合模型.html"><a href="线性混合模型.html#方案2"><i class="fa fa-check"></i><b>2.2.2</b> 方案2</a></li>
+<li class="chapter" data-level="2.2.3" data-path="线性混合模型.html"><a href="线性混合模型.html#方案3em算法"><i class="fa fa-check"></i><b>2.2.3</b> 方案3：EM算法</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="p-spline.html"><a href="p-spline.html"><i class="fa fa-check"></i><b>2</b> P-Spline<span></span></a><ul>
-<li class="chapter" data-level="2.1" data-path="p-spline.html"><a href="p-spline.html#mixed-model"><i class="fa fa-check"></i><b>2.1</b> mixed model<span></span></a></li>
+<li class="chapter" data-level="3" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i><b>3</b> <strong>参考文献</strong></a></li>
+<li class="chapter" data-level="4" data-path="Mixed-Model.html"><a href="Mixed-Model.html"><i class="fa fa-check"></i><b>4</b> 线性混合模型</a><ul>
+<li class="chapter" data-level="4.1" data-path="Mixed-Model.html"><a href="Mixed-Model.html#案例1"><i class="fa fa-check"></i><b>4.1</b> 案例1</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="Mixed-Model.html"><a href="Mixed-Model.html#错误的方法固定效应模型"><i class="fa fa-check"></i><b>4.1.1</b> 错误的方法，固定效应模型</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html"><i class="fa fa-check"></i><b>3</b> Multidimensional Smoothing<span></span></a><ul>
-<li class="chapter" data-level="3.1" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.1"><i class="fa fa-check"></i><b>3.1</b> Figure 4.1<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.2"><i class="fa fa-check"></i><b>3.2</b> Figure 4.2<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.8"><i class="fa fa-check"></i><b>3.3</b> Figure 4.8<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.9"><i class="fa fa-check"></i><b>3.4</b> Figure 4.9<span></span></a></li>
-<li class="chapter" data-level="3.5" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.10"><i class="fa fa-check"></i><b>3.5</b> Figure 4.10<span></span></a></li>
-<li class="chapter" data-level="3.6" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.11"><i class="fa fa-check"></i><b>3.6</b> Figure 4.11<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="Mixed-Model.html"><a href="Mixed-Model.html#案例2"><i class="fa fa-check"></i><b>4.2</b> 案例2</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix<span></span></a></li>
-<li class="chapter" data-level="5" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>5</b> Cross-references<span></span></a><ul>
-<li class="chapter" data-level="5.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>5.1</b> Chapters and sub-chapters<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>5.2</b> Captioned figures and tables<span></span></a></li>
+<li class="chapter" data-level="5" data-path="p-spline.html"><a href="p-spline.html"><i class="fa fa-check"></i><b>5</b> P-Spline</a><ul>
+<li class="chapter" data-level="5.1" data-path="p-spline.html"><a href="p-spline.html#mixed-model"><i class="fa fa-check"></i><b>5.1</b> mixed model</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>6</b> Parts<span></span></a></li>
-<li class="chapter" data-level="7" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>7</b> Footnotes and citations<span></span></a><ul>
-<li class="chapter" data-level="7.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>7.1</b> Footnotes<span></span></a></li>
-<li class="chapter" data-level="7.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>7.2</b> Citations<span></span></a></li>
+<li class="chapter" data-level="6" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html"><i class="fa fa-check"></i><b>6</b> Multidimensional Smoothing</a><ul>
+<li class="chapter" data-level="6.1" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.1"><i class="fa fa-check"></i><b>6.1</b> Figure 4.1</a></li>
+<li class="chapter" data-level="6.2" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.2"><i class="fa fa-check"></i><b>6.2</b> Figure 4.2</a></li>
+<li class="chapter" data-level="6.3" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.8"><i class="fa fa-check"></i><b>6.3</b> Figure 4.8</a></li>
+<li class="chapter" data-level="6.4" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.9"><i class="fa fa-check"></i><b>6.4</b> Figure 4.9</a></li>
+<li class="chapter" data-level="6.5" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.10"><i class="fa fa-check"></i><b>6.5</b> Figure 4.10</a></li>
+<li class="chapter" data-level="6.6" data-path="multidimensional-smoothing.html"><a href="multidimensional-smoothing.html#figure-4.11"><i class="fa fa-check"></i><b>6.6</b> Figure 4.11</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>8</b> Blocks<span></span></a><ul>
-<li class="chapter" data-level="8.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>8.1</b> Equations<span></span></a></li>
-<li class="chapter" data-level="8.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>8.2</b> Theorems and proofs<span></span></a></li>
-<li class="chapter" data-level="8.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>8.3</b> Callout blocks<span></span></a></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a></li>
+<li class="chapter" data-level="8" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>8</b> Cross-references</a><ul>
+<li class="chapter" data-level="8.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>8.1</b> Chapters and sub-chapters</a></li>
+<li class="chapter" data-level="8.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>8.2</b> Captioned figures and tables</a></li>
 </ul></li>
-<li><a href="references.html#references">References<span></span></a></li>
+<li class="chapter" data-level="9" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>9</b> Parts</a></li>
+<li class="chapter" data-level="10" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>10</b> Footnotes and citations</a><ul>
+<li class="chapter" data-level="10.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>10.1</b> Footnotes</a></li>
+<li class="chapter" data-level="10.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>10.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>11</b> Blocks</a><ul>
+<li class="chapter" data-level="11.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>11.1</b> Equations</a></li>
+<li class="chapter" data-level="11.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>11.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="11.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>11.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -203,28 +218,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="blocks" class="section level1 hasAnchor">
-<h1><span class="header-section-number">Chapter 8</span> Blocks<a href="blocks.html#blocks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 11</span> Blocks<a href="blocks.html#blocks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="equations" class="section level2 hasAnchor">
-<h2><span class="header-section-number">8.1</span> Equations<a href="blocks.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">11.1</span> Equations<a href="blocks.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here is an equation.</p>
 <p><span class="math display" id="eq:binom">\[\begin{equation} 
   f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \tag{8.1}
+  \tag{11.1}
 \end{equation}\]</span></p>
-<p>You may refer to using <code>\@ref(eq:binom)</code>, like see Equation <a href="blocks.html#eq:binom">(8.1)</a>.</p>
+<p>You may refer to using <code>\@ref(eq:binom)</code>, like see Equation <a href="blocks.html#eq:binom">(11.1)</a>.</p>
 </div>
 <div id="theorems-and-proofs" class="section level2 hasAnchor">
-<h2><span class="header-section-number">8.2</span> Theorems and proofs<a href="blocks.html#theorems-and-proofs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Labeled theorems can be referenced in text using <code>\@ref(thm:tri)</code>, for example, check out this smart theorem <a href="blocks.html#thm:tri">8.1</a>.</p>
+<h2><span class="header-section-number">11.2</span> Theorems and proofs<a href="blocks.html#theorems-and-proofs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Labeled theorems can be referenced in text using <code>\@ref(thm:tri)</code>, for example, check out this smart theorem <a href="blocks.html#thm:tri">11.1</a>.</p>
 <div class="theorem">
-<p><span id="thm:tri" class="theorem"><strong>Theorem 8.1  </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the <em>length</em> of the hypotenuse
+<p><span id="thm:tri" class="theorem"><strong>Theorem 11.1  </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the <em>length</em> of the hypotenuse
 and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the <strong>other</strong> two sides, we have
 <span class="math display">\[a^2 + b^2 = c^2\]</span></p>
 </div>
 <p>Read more here <a href="https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html</a>.</p>
 </div>
 <div id="callout-blocks" class="section level2 hasAnchor">
-<h2><span class="header-section-number">8.3</span> Callout blocks<a href="blocks.html#callout-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">11.3</span> Callout blocks<a href="blocks.html#callout-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html</a></p>
 
 </div>
