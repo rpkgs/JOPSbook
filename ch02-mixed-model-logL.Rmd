@@ -1,0 +1,224 @@
+# 最大似然估计
+
+## 正态分布似然函数
+
+### 正态密度函数
+
+$$
+f\left(y ; \mu, \sigma^{2}\right)=\frac{1}{\sigma \sqrt{(2 \pi)}} e^{-\frac{(y-\mu)^{2}}{2 \sigma^{2}}}
+$$
+
+### 联合密度的似然函数
+
+当n个观测值相互独立，他们的似然函数（等价于联合密度函数）为：
+$$
+L\left(\mu, \sigma^{2} ; y\right)=\prod_{i=1}^{n} \frac{1}{\sigma \sqrt{(2 \pi)}} e^{-\frac{\left(y_{i}-\mu\right)^{2}}{2 \sigma^{2}}}
+$$
+
+### 正态分布似然函数
+
+对似然函数，两边求自然对数:
+$$
+\log L=-n \frac{1}{2} \log \left(2 \pi \sigma^{2}\right)-\frac{1}{2 \sigma^{2}} \sum_{i}\left(y_{i}-\mu\right)
+$$
+进一步简化：
+$$
+\log L=-0.5 n \log (2 \pi)-0.5 n \log \left(\sigma^{2}\right)-\frac{1}{2 \sigma^{2}} \sum_{i}\left(y_{i}-\mu\right)
+$$
+忽略常数项$-0.5 n \log (2 \pi)$，
+$$
+\log L≈-\frac{1}{2} n \log \left(\sigma^{2}\right)-\frac{1}{2 \sigma^{2}} \sum_{i}\left(y_{i}-\mu\right)
+$$
+
+
+## 线性混合模型
+
+方程：
+$$
+\begin{array}{c}
+y=X \beta+Z u+e \\
+{\left[\begin{array}{cc}
+X' X & X' Z \\
+Z' X & Z' Z+A^{-1} K
+\end{array}\right]\left[\begin{array}{c}
+\hat{\mu} \\
+\hat{\beta}
+\end{array}\right]=\left[\begin{array}{c}
+X' Y \\
+Z' Y
+\end{array}\right]}
+\end{array}
+$$
+
+假定$u \sim N(0, \Psi)$，$e \sim N(0, D)$；$\Psi = \sigma^2 L(\theta) L(\theta)'$，$D = \tau^2 I$
+
+
+
+则
+$$
+y \sim N (X \beta, Z\Psi Z' + D)
+$$
+
+$$
+\begin{align*}
+V^{-1}
+&=(D+Z \Psi Z')^{-1} \\
+&= D^{-1} - D^{-1} Z (\Psi^{-1} + Z' D^{-1} Z)^{-1} Z' D^{-1}  \\
+\end{align*}
+$$
+
+> 此处用到逆矩阵的定理（详见：Zhang Xian-Da, 2017, Eq. 1.7.2）。
+
+### LMM的似然函数
+
+把$Z u+e $看做残差项，似然函数可以写作：
+$$
+L=\frac{1}{\sqrt{2 \pi V}} e^{-\frac{1}{2}(y-X \beta)' V^{-}(y-X \beta)}
+$$
+$$
+\log L=-0.5 \log (|V|)-0.5(y-X \beta)' V^{-1}(y-X \beta)
+$$
+> 注意：此处尚未加入$-0.5 \log (|X' V^{-1} X|)$。
+
+假设此处u的方差$\psi$已知，则$\beta$可以通过下式得出：
+$$
+\hat{\beta}(\psi)=\arg \min _{\beta}(y-X \beta)^{\top} \Sigma(\psi)^{-1}(y-X \beta)
+$$
+在一阶导为0时，$\hat{\beta}(\psi)$取得最优解:
+$$
+\begin{align*}
+X^{\top} \Sigma(\psi)^{-1}(y-X \beta)=0  \\
+\hat{\beta}(\psi)=\left(X^{\top} \Sigma^{-1} X\right)^{-1} X^{\top} \Sigma(\psi)^{-1} y
+\end{align*}
+$$
+将$\hat{\beta}(\psi)$重新带入似然函数的公式：
+$$
+-\frac{1}{2} \log (|\Sigma(\psi)|)-\frac{1}{2}(y-X \hat{\beta}(\psi))^{\top} \Sigma(\psi)^{-1}(y-X \hat{\beta}(\psi))
+$$
+令$P= (V + XX')^{-1} = V^{-1}-V^{-1} X\left(X' V^{-1} X\right)^{-1} X' V^{-1}$，最终的似然函数为:
+$$
+\log L=-0.5 \log (|V|)-0.5 \log \left(\left|X' V^{-1} X\right|\right)-0.5 y' P y
+$$
+> 这里的转换暂时没有看懂。
+
+最终的求解方案
+
+- 公式1：
+  $$
+  -2 L\left(\sigma_{a}^{2}, \sigma_{\theta}^{2} ; y\right)=\log |V|+\log \left|X' V^{-1} X\right|+y' P y
+  $$
+
+- 公式2：
+  $$
+  -2 L\left(\sigma_{a}^{2}, \sigma_{e}^{2} ; y\right)=\log |C|+\log |R|+\log |G|+y' P y
+  $$
+
+其中, $P=V^{-1}-V^{-1} X\left(X' V^{-1} X\right)^{-1} X' V^{-1}$，$C=\left[\begin{array}{cc}
+X' R^{-1} X & X' R^{-1} Z \\
+Z' R^{-1} X & Z' R^{-1} Z+G^{-1}
+\end{array}\right]$
+
+### R语言实战
+
+#### 方案1
+
+```R
+mixmodel.loglik<-function(theta,y){
+  sigmag2<-theta[1]
+  sigmae2<-theta[2]
+
+  n = length(y)
+  G = A*sigmag2
+  R = diag(n)*sigmae2
+  V = Z %*% G %*% t(Z) + R
+  Vi = solve(V)
+
+  P = Vi - Vi %*% X %*% solve(t(X) %*% Vi %*% X) %*% t(X) %*% Vi
+  logl = -0.5*(log(det(V)) + log(det(t(X) %*% Vi %*% X)) + t(y) %*% P %*% y)
+  -logl
+}
+```
+
+
+
+#### 方案2
+
+```R
+mixmodel.loglik2 <-function(theta,y){
+  sigmag2<-theta[1]
+  sigmae2<-theta[2]
+
+  n = length(y)
+  G = A*sigmag2
+  R = diag(n)*sigmae2
+  V = Z %*% G %*% t(Z) + R
+  Vi = solve(V)
+  P = Vi - Vi %*% X %*% solve(t(X) %*% Vi %*% X) %*% t(X) %*% Vi
+  C11 = t(X) %*%  solve(R) %*% X
+  C12 = t(X) %*%  solve(R) %*% Z
+  C21 = t(Z) %*%  solve(R) %*% X
+  C22 = t(Z) %*%  solve(R) %*% Z + solve(G)
+  C = rbind(cbind(C11,C12), cbind(C21,C22))
+  logl2 = -0.5*(log(det(C)) + log(det(R)) + log(det(G)) + t(y) %*% P %*% y)
+  -logl2
+}
+optim(c(1,1), mixmodel.loglik2, y=y)
+```
+
+#### 方案3：EM算法
+
+```R
+herd <- factor(c(1,2,2,1,1,2,1,2,2))
+sire <- factor(c(1,1,1,2,2,3,4,4,4))
+y <- c(240,190,170,180,200,140,170,100,130)
+REML_data <- data.frame(herd,sire,y)
+X <- model.matrix(y~herd-1)
+Z <- model.matrix(y~sire-1)
+XX <- crossprod(X)
+XZ <- crossprod(X,Z)
+ZX <- t(XZ)
+ZZ <- crossprod(Z)
+LHS <- rbind(cbind(XX,XZ),cbind(ZX,ZZ))
+Xy <- crossprod(X,y)
+Zy <- crossprod(Z,y)
+RHS <- rbind(Xy,Zy)
+A <- matrix(c(1,0.25,0,0,0.25,1,0,0,0,0,1,0,0,0,0,1),nr=4)
+Ainv <- solve(A)
+yy <- crossprod(y)
+N <- length(y)
+rankX <-qr(X)$rank
+q <- length(unique(sire))
+nh <- length(unique(herd))
+k0 <- threshold <- 0.00000001
+write.table(t(c("sigmaE","sigmaS","k")),file="results.txt",row.names = FALSE, col.names = FALSE)
+repeat {
+  LHS1 <- LHS
+  k <- k0
+  LHS1[(nh + 1):(nh + q), (nh + 1):(nh + q)] <- LHS1[(nh + 1):(nh + q), (nh + 1):(nh + q)] + Ainv * k
+  sol <- solve(LHS1, RHS)
+  C <- solve(LHS1)
+  Czz <- C[(nh + 1):(nh + q), (nh + 1):(nh + q)]
+  sigmaE <- (yy - crossprod(sol, RHS)) / (N - rankX)
+  sAs <- t(sol[(nh + 1):(nh + q)]) %*% Ainv %*% sol[(nh + 1):(nh + q)]
+  trCA <- sum(diag(Czz %*% Ainv))
+  sigmaS <- (sAs + trCA * sigmaE) / q
+  k0 <- as.numeric(sigmaE / sigmaS)
+  out <- c(sigmaE, sigmaS, k0)
+  write.table(t(out), file = "results.txt", append = TRUE, row.names = FALSE, col.names = FALSE)
+  if (abs(k - k0) < threshold) break
+}
+results <- read.table("results.txt",header = TRUE)
+results
+```
+
+## 参考文献
+
+> 1. <http://people.math.aau.dk/~rw/Undervisning/Mat6F12/Handouts/2.hand.pdf>
+>
+> 2. <http://www2.stat.duke.edu/~sayan/Sta613/2018/lec/LMM.pdf>
+>
+> 3. 张勤老师 《统计遗传学暑期学校教材》 中国农业大学 2019.07 
+>
+> 4. 宁超公众号：Python与数量遗传学 [方差组分估计之约束最大似然](https://mp.weixin.qq.com/s?__biz=MzUxMzc2NTEyNA==&mid=2247483760&idx=1&sn=d3272436be8a8b1aa13afe237bcdddea&scene=21#wechat_redirect)
+
+> 5. <https://cloud.tencent.com/developer/article/1542008>

@@ -47,17 +47,21 @@ bookdown::render_book()
 ```
 如需编译pdf（`bookdown::pdf_book`），需要安装`XeLaTeX`。建议使用`TinyTeX`：<https://yihui.org/tinytex/>。
 
+
 ## bookdown预览 {.unnumbered #view}
 
 ```{r eval=FALSE}
 bookdown::serve_book()
 ```
 
+
 ## bookdown使用心得 {.unnumbered #thinking}
 
 - `Rmd`文件名的排序决定了编译顺序。建议Rmd在命名时需要考虑文件排序。
 
 - `R`包加载一次即可。`index.Rmd`是最先被编译的`Rmd`文件，因此常用的R包可以在`index.Rmd`中加载。
+
+- `Rmd`在编译过程中无权限安装R包，因此require2无法实现其原本设计的功能。
 
 
 ## 作者简介 {.unnumbered #author}

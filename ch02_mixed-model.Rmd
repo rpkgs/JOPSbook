@@ -54,3 +54,68 @@ summary(m3)
 
 summary(m3)$sigma^2 - summary(m1)$sigma^2 / 4
 ```
+
+## 案例2
+
+```{r}
+library(nlme)
+
+data(Machines)
+Machines %<>% data.table()
+
+summary(Machines)
+head(Machines)
+
+attach(Machines)
+interaction.plot(Machine, Worker, score)
+```
+
+```{r}
+llm <- function(theta, X, Z, y) {
+  ## untransform parameters...
+  sigma.b <- exp(theta[1])
+  sigma <- exp(theta[2])
+  ## extract dimensions...
+  n <- length(y)
+  pf <- ncol(X)
+  pr <- ncol(Z)
+  ## obtain \hat \beta, \hat b...
+  X1 <- cbind(X, Z)
+  ipsi <- c(rep(0, pf), rep(1 / sigma.b^2, pr))
+  b1 <- solve(
+    crossprod(X1) / sigma^2 + diag(ipsi),
+    t(X1) %*% y / sigma^2
+  )
+  ## compute log|Z’Z/sigma^2 + I/sigma.b^2|...
+  ldet <- sum(log(diag(chol(
+    crossprod(Z) / sigma^2 + diag(ipsi[-(1:pf)])
+  ))))
+  ## compute log profile likelihood...
+  l <- (-sum((y - X1 %*% b1)^2) / sigma^2 - sum(b1^2 * ipsi) -
+    n * log(sigma^2) - 
+    pr * log(sigma.b^2) - 
+    2 * ldet - 
+    n * log(2 * pi)) / 2
+  attr(l, "b") <- as.numeric(b1) ## return \hat beta and \hat b
+  -l
+}
+```
+
+```{r}
+# 将常数项去掉n
+ormal.lik2<-function(theta, y){
+  mu <- theta[1]
+  sigma2 <- theta[2]
+  n = length(y)
+  z = (y-mu)/sigma  # logl = -0.5*n*log(sigma^2) - (1/(2*sigma^2)*sum((y-mu)^2)) 
+  logl = 
+    -1 / 2 * n * log(2 * pi) - 
+     1 / 2 * n * log(sigma2) - 
+     (1 / (2 * sigma2)) * sum((y - mu)**2)
+  # `-1 / 2 * n * log(2 * pi)`: 常数项
+  # logl = - 1 / 2 * n * log(sigma2) - (1 / (2 * sigma2)) * sum((y - mu)**2)
+  -logl
+}
+
+# https://cloud.tencent.com/developer/article/1542008
+```
